@@ -2,10 +2,24 @@
 
 ### Point Cloud Library (PCL)
 В первую очередь PCL это автономный крупномасштабный открытый проект для обработки 2D / 3D изображений и облаков точек. Проект начал зарождаться в 2011 году: на [GitHub-е](https://github.com/PointCloudLibrary "GitHub-е") проекта начали появляться первые коммиты. 
-Хотя проект подходит для решения множества задач, в частности, нас будет интересовать раздел облаков точек, а именно их фильтрации. В PCL достаточно много различных фильтров для облаков точек. Например можно встретить такие фильтры как Гауссов фильтр ([StatisticalOutlierRemoval](https://pointclouds.org/documentation/classpcl_1_1_statistical_outlier_removal.html "StatisticalOutlierRemoval")), Двусторонний фильтр ([BilateralFilter](https://pointclouds.org/documentation/classpcl_1_1_bilateral_filter.html "BilateralFilter")), фильтр по количеству соседних точек в заданном радиусе ([RadiusOutlierRemoval](https://pointclouds.org/documentation/classpcl_1_1_radius_outlier_removal.html "RadiusOutlierRemoval")).
-Разберем применение данной библиотеки на примере
+Хотя проект подходит для решения множества задач, в частности, нас будет интересовать раздел облаков точек, а именно их фильтрации. В PCL достаточно много различных фильтров для облаков точек. Например можно встретить такие фильтры как Гауссов фильтр ([`StatisticalOutlierRemoval`](https://pointclouds.org/documentation/classpcl_1_1_statistical_outlier_removal.html "StatisticalOutlierRemoval")), Двусторонний фильтр ([`BilateralFilter`](https://pointclouds.org/documentation/classpcl_1_1_bilateral_filter.html "BilateralFilter")), фильтр по количеству соседних точек в заданном радиусе ([`RadiusOutlierRemoval`](https://pointclouds.org/documentation/classpcl_1_1_radius_outlier_removal.html "RadiusOutlierRemoval")). Все они объединяются в библиотеку **pcl_filters**, она содержит многие механизмы удаления выбросов и шума для трехмерных облаков точек.
+
+Разберем применение данной библиотеки на примере двустороннего фильтра:
+
+```c++
+***
+ pcl::PointCloud<pcl::PointXYZ>::Ptr xyz (new pcl::PointCloud<pcl::PointXYZ>); // Для представления облаков точек в библиотеке существует множество типов данных, например PointXYZ и PointCloud, о них будет ниже
+ pcl::FastBilateralFilter<pcl::PointXYZ> fbf; // Создаем объект фильтра
+ fbf.setInputCloud (xyz);
+ fbf.setSigmaS (sigma_s); // Устанавливаем стандартное отклонение для пространственной окрестности двустороннего фильтра
+ fbf.setSigmaR (sigma_r); // Устанавливаем стандартное отклонение по Гауссу, чтобы контролировать, насколько соседние пиксели падают из-за разницы в интенсивности
+ pcl::PointCloud<pcl::PointXYZ> xyz_filtered; // Создаем объект, в который будем сохранять результат нашей фильтрации
+ fbf.filter (xyz_filtered);
+***
 ```
-int main(){
-class A, B = 1
-}
-``` 
+В первой строке мы упоминали тип данных `PointXYZ`, он и еще многие необходимые для работы типы (для представления 2D / 3D облаков, облаков с цветовой индикацией) лежат в библиотеке **pcl_common**.
+
+Библиотека **pcl_common** содержит общие структуры данных и методы, используемые большинством библиотек PCL. Основные структуры данных включают класс PointCloud и множество типов точек, которые используются для представления точек, нормалей поверхности, значений цвета RGB, дескрипторов объектов и т. д. Она также содержит множество функций для вычисления расстояний / норм, средних и ковариаций, угловых преобразований, геометрических преобразований и многого другого. Помимо [`PointXYZ`](https://pointclouds.org/documentation/structpcl_1_1_point_x_y_z.html)(структуры точки с обычными евклидовыми координатами) в библиотеке есть такие типы точек, как [`PointXYZRGB`](https://pointclouds.org/documentation/structpcl_1_1_point_x_y_z_r_g_b.html) (евклидовы координаты + RGB цвет), [`PointXY`](https://pointclouds.org/documentation/structpcl_1_1_point_x_y.html)(точечная структура с двумя евклидовыми координатами), [`PointNormal`](https://pointclouds.org/documentation/structpcl_1_1_point_normal.html)(евклидовы координаты точки, нормальные координаты точки и оценка кривизны поверхности).
+
+### Готовые приложения с функцией фильтрации облаков точек
+Часто, при работе с облаками точек, нам нужно увидеть результат быстро и провзаимодействовать с ним, для этого уже написано несколько программ, частью функционала которых так же является фильтрация облаков точек.
