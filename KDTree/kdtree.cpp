@@ -25,8 +25,7 @@ public:
         dims = point_.dims;
     }
 
-
-    KDPoint &operator=(KDPoint &point_)
+    KDPoint &operator=(KDPoint const &point_)
     {
         if (this == &point_)
             return *this;
@@ -45,33 +44,41 @@ public:
         left = nullptr;
         right = nullptr;
     }
-    Node operator=(Node &node_)
+    Node(Node *node_)
+    {
+        left = node_->left;
+        right = node_->right;
+        point = node_->point;
+    }
+    Node operator=(Node const &node_)
     {
         if (this == &node_)
             return *this;
         this->point = node_.point;
+        this->left = node_.left;
+        this->right = node_.right;
         return *this;
     }
 };
 
 // A method to create a node of KD tree
-class Node *newNode(KDPoint &point_)
+Node newNode(KDPoint &point_)
 {
     class Node temp;
 
     temp.point = point_;
 
     temp.left = temp.right = NULL;
-    return &temp;
+    return temp;
 }
 
 // Inserts a new node and returns root of modified tree
 // The parameter depth is used to decide axis of comparison
-Node *insertRec(Node *root, KDPoint &point, unsigned depth)
+Node insertRec(Node *root, KDPoint &point, unsigned depth)
 {
     // Tree is empty?
-    if (root == NULL)
-        return newNode(point);
+    if (root == nullptr)
+        return &newNode(point);
 
     // Calculate current dimension (cd) of comparison
     unsigned cd = depth % k;
@@ -79,19 +86,19 @@ Node *insertRec(Node *root, KDPoint &point, unsigned depth)
     // Compare the new point with root on current dimension 'cd'
     // and decide the left or right subtree
     if (point.dims[cd] < (root->point.dims[cd]))
-        root->left = insertRec(root->left, point, depth + 1);
+        *(root->left) = insertRec(root->left, point, depth + 1);
     else
-        root->right = insertRec(root->right, point, depth + 1);
+        *(root->right) = insertRec(root->right, point, depth + 1);
 
-    return root;
+    return *root;
 }
 
 // Function to insert a new point with given point in
 // KD Tree and return new root. It mainly uses above recursive
 // function "insertRec()"
-Node *insert(Node *root, KDPoint &point)
+Node insert(Node &root, KDPoint &point)
 {
-    return insertRec(root, point, 0);
+    return insertRec(&root, point, 0);
 }
 
 // A utility method to determine if two Points are same
@@ -147,7 +154,7 @@ int main()
     }
     for (auto point : point_vector)
     {
-        root = insert(root, point);
+        root = &insert(*root, point);
     }
 
     KDPoint point1(10, 19, 7);
