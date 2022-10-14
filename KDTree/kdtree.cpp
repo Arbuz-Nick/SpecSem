@@ -1,9 +1,11 @@
 #include <vector>
 #include <iostream>
 
+
 const int k = 3;
 class KDPoint
 {
+
 public:
     std::vector<float> dims;
     KDPoint(float x_ = 0, float y_ = 0, float z_ = 0)
