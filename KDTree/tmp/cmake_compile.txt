@@ -1,0 +1,1 @@
+cmake ../ -DWITH_GTK_2_X=ON -DWITH_OPENGL=ON

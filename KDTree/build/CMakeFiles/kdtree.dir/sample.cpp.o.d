@@ -542,5 +542,8 @@ CMakeFiles/kdtree.dir/sample.cpp.o: \
   /usr/local/Cellar/opencv/4.6.0_1/include/opencv4/opencv2/video.hpp \
   /usr/local/Cellar/opencv/4.6.0_1/include/opencv4/opencv2/video/tracking.hpp \
   /usr/local/Cellar/opencv/4.6.0_1/include/opencv4/opencv2/video/background_segm.hpp \
+  /usr/local/Cellar/opencv/4.6.0_1/include/opencv4/opencv2/viz/viz3d.hpp \
+  /usr/local/Cellar/opencv/4.6.0_1/include/opencv4/opencv2/viz/types.hpp \
+  /usr/local/Cellar/opencv/4.6.0_1/include/opencv4/opencv2/viz/widgets.hpp \
   /Users/anr/Desktop/SpecSem/SpecSem/KDTree/kdtree.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/numeric

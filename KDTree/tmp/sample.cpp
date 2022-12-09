@@ -1,4 +1,8 @@
 #include <opencv2/opencv.hpp>
+#include <opencv2/viz/viz3d.hpp>
+//#include <opencv2/viz/viz3d.hpp>
+//#include <opencv2/viz/vizcore.hpp>
+
 #include <iostream>
 #include <array>
 #include <vector>
@@ -29,6 +33,7 @@ public:
 
 int main(int argc, char **argv)
 {
+
 	const int seed = argc > 1 ? std::stoi(argv[1]) : 0;
 	srand(seed);
 
@@ -93,11 +98,20 @@ int main(int argc, char **argv)
 	cv::rectangle(I3, rect, cv::Scalar(0, 0, 255));
 
 
+	cv::viz::Viz3d window; //creating a Viz window
+	//Displaying the Coordinate Origin (0,0,0)
+	window.showWidget("coordinate", cv::viz::WCoordinateSystem(100));
+	//Displaying the 3D points in green
+	//window.showWidget("points", cv::viz::WCloud(pts3d, viz::Color::green()));
+	window.spin();
+
 	// show results
+
 	cv::imshow("Nearest neigbor search", I0);
 	cv::imshow("K-nearest neigbors search (k = 10)", I1);
 	cv::imshow("Radius search (radius = 50)", I2);
-    cv::imshow("Rectangle search (side = 100)", I3);
+	cv::imshow("Rectangle search (side = 100)", I3);
+
 
 	cv::waitKey(0);
 

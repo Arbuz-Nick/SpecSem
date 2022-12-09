@@ -222,6 +222,12 @@ Project_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Project_SOURCE_DIR:STATIC=/Users/anr/Desktop/SpecSem/SpecSem/KDTree
 
+//No help, variable specified on the command line.
+WITH_GTK_2_X:UNINITIALIZED=ON
+
+//No help, variable specified on the command line.
+WITH_OPENGL:UNINITIALIZED=ON
+
 
 ########################
 # INTERNAL cache entries

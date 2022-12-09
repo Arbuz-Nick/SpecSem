@@ -69,28 +69,28 @@ include CMakeFiles/kdtree.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/kdtree.dir/flags.make
 
-CMakeFiles/kdtree.dir/sample.cpp.o: CMakeFiles/kdtree.dir/flags.make
-CMakeFiles/kdtree.dir/sample.cpp.o: /Users/anr/Desktop/SpecSem/SpecSem/KDTree/sample.cpp
-CMakeFiles/kdtree.dir/sample.cpp.o: CMakeFiles/kdtree.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anr/Desktop/SpecSem/SpecSem/KDTree/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/kdtree.dir/sample.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kdtree.dir/sample.cpp.o -MF CMakeFiles/kdtree.dir/sample.cpp.o.d -o CMakeFiles/kdtree.dir/sample.cpp.o -c /Users/anr/Desktop/SpecSem/SpecSem/KDTree/sample.cpp
+CMakeFiles/kdtree.dir/test3d.cpp.o: CMakeFiles/kdtree.dir/flags.make
+CMakeFiles/kdtree.dir/test3d.cpp.o: /Users/anr/Desktop/SpecSem/SpecSem/KDTree/test3d.cpp
+CMakeFiles/kdtree.dir/test3d.cpp.o: CMakeFiles/kdtree.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anr/Desktop/SpecSem/SpecSem/KDTree/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/kdtree.dir/test3d.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/kdtree.dir/test3d.cpp.o -MF CMakeFiles/kdtree.dir/test3d.cpp.o.d -o CMakeFiles/kdtree.dir/test3d.cpp.o -c /Users/anr/Desktop/SpecSem/SpecSem/KDTree/test3d.cpp
 
-CMakeFiles/kdtree.dir/sample.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kdtree.dir/sample.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anr/Desktop/SpecSem/SpecSem/KDTree/sample.cpp > CMakeFiles/kdtree.dir/sample.cpp.i
+CMakeFiles/kdtree.dir/test3d.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kdtree.dir/test3d.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anr/Desktop/SpecSem/SpecSem/KDTree/test3d.cpp > CMakeFiles/kdtree.dir/test3d.cpp.i
 
-CMakeFiles/kdtree.dir/sample.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kdtree.dir/sample.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anr/Desktop/SpecSem/SpecSem/KDTree/sample.cpp -o CMakeFiles/kdtree.dir/sample.cpp.s
+CMakeFiles/kdtree.dir/test3d.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kdtree.dir/test3d.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anr/Desktop/SpecSem/SpecSem/KDTree/test3d.cpp -o CMakeFiles/kdtree.dir/test3d.cpp.s
 
 # Object files for target kdtree
 kdtree_OBJECTS = \
-"CMakeFiles/kdtree.dir/sample.cpp.o"
+"CMakeFiles/kdtree.dir/test3d.cpp.o"
 
 # External object files for target kdtree
 kdtree_EXTERNAL_OBJECTS =
 
-kdtree: CMakeFiles/kdtree.dir/sample.cpp.o
+kdtree: CMakeFiles/kdtree.dir/test3d.cpp.o
 kdtree: CMakeFiles/kdtree.dir/build.make
 kdtree: /usr/local/lib/libopencv_gapi.4.6.0.dylib
 kdtree: /usr/local/lib/libopencv_stitching.4.6.0.dylib

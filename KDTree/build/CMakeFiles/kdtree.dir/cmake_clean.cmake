@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/kdtree.dir/sample.cpp.o"
-  "CMakeFiles/kdtree.dir/sample.cpp.o.d"
+  "CMakeFiles/kdtree.dir/test3d.cpp.o"
+  "CMakeFiles/kdtree.dir/test3d.cpp.o.d"
   "kdtree"
   "kdtree.pdb"
 )

@@ -1,14 +1,18 @@
 #ifndef __KDTREE_H__
 #define __KDTREE_H__
 
+#include <iostream>
 #include <vector>
 #include <numeric>
 #include <algorithm>
 #include <exception>
 #include <functional>
 
+
+
 namespace kdt
 {
+	static int niter = 0;
 	/** @brief k-d tree class.
 	*/
 	template <class PointT>
@@ -105,6 +109,7 @@ namespace kdt
 		{
 			std::vector<int> indices;
 			rectangleSearchRecursive(bot, top, root_, indices);
+			std::cout << niter << std::endl;
 			return indices;
 		}
 
@@ -304,6 +309,7 @@ namespace kdt
 
 		void rectangleSearchRecursive(const PointT& bot, const PointT &top, const Node* node, std::vector<int>& indices) const
 		{
+			niter += 1;
 			if (node == nullptr)
 				return;
 
@@ -318,13 +324,22 @@ namespace kdt
 				indices.push_back(node->idx);
 
 			const int axis = node->axis;
-			const auto mid = (bot[axis] + top[axis]) / 2;
-			const int dir = mid < train[axis] ? 0 : 1;
-			rectangleSearchRecursive(bot, top, node->next[dir], indices);
+			
+			if (bot[axis] > train[axis]){
+				rectangleSearchRecursive(bot, top, node->next[1], indices);
+			} else if (top[axis] < train[axis])
+				rectangleSearchRecursive(bot, top, node->next[0], indices);
+			else {
+				rectangleSearchRecursive(bot, top, node->next[0], indices);
+				rectangleSearchRecursive(bot, top, node->next[1], indices);
+			}
+			//const int dir = mid < train[axis] ? 0 : 1;
+			
+			
 
-			const double diff = fabs(mid - train[axis]);
+			//const double diff = fabs(mid - train[axis]);
 			//if (is_in)
-			rectangleSearchRecursive(bot, top, node->next[!dir], indices);
+			//rectangleSearchRecursive(bot, top, node->next[!dir], indices);
 		}
 
 
