@@ -119,9 +119,9 @@ int main(int argc, char **argv)
 	cv::rectangle(I3, rect, cv::Scalar(0, 0, 255));
 
 
-	int side_x = 100;
-    int side_y = 200;
-    int side_z = 100;
+	int side_x = 500;
+    int side_y = 500;
+    int side_z = 500;
 
     width = 1000;
     height = 1000;

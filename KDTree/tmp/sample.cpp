@@ -1,7 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/viz/viz3d.hpp>
-//#include <opencv2/viz/viz3d.hpp>
-//#include <opencv2/viz/vizcore.hpp>
+// #include <opencv2/viz/viz3d.hpp>
+// #include <opencv2/viz/vizcore.hpp>
 
 #include <iostream>
 #include <array>
@@ -14,7 +14,6 @@
 class MyPoint : public std::array<double, 2>
 {
 public:
-
 	// dimension of space (or "k" of k-d tree)
 	// KDTree class accesses this member
 	static const int DIM = 2;
@@ -22,7 +21,7 @@ public:
 	// the constructors
 	MyPoint() {}
 	MyPoint(double x, double y)
-	{ 
+	{
 		(*this)[0] = x;
 		(*this)[1] = y;
 	}
@@ -52,7 +51,7 @@ int main(int argc, char **argv)
 		points[i] = MyPoint(x, y);
 	}
 
-	for (const auto& pt : points)
+	for (const auto &pt : points)
 		cv::circle(img, cv::Point2d(pt), 1, cv::Scalar(0, 255, 255), -1);
 
 	// build k-d tree
@@ -77,7 +76,7 @@ int main(int argc, char **argv)
 		cv::circle(I1, cv::Point2d(points[i]), 1, cv::Scalar(255, 255, 0), -1);
 		cv::line(I1, cv::Point2d(query), cv::Point2d(points[i]), cv::Scalar(0, 0, 255));
 	}
-	
+
 	// radius search
 	const cv::Mat I2 = img.clone();
 	const double radius = 50;
@@ -86,23 +85,21 @@ int main(int argc, char **argv)
 		cv::circle(I2, cv::Point2d(points[i]), 1, cv::Scalar(255, 255, 0), -1);
 	cv::circle(I2, cv::Point2d(query), cvRound(radius), cv::Scalar(0, 0, 255));
 
-    const cv::Mat I3 = img.clone();
-    const int side = 200;
-    const MyPoint bot(width*0.5 - side/2, height*0.5 - side/2), top(width*0.5 + side/2, height*0.5 + side/2);
-    const std::vector<int> rectIndices = kdtree.rectangleSearch(bot, top);
-    cv::Rect rect(width*0.5 - side/2, height*0.5 - side/2, side, side);
+	const cv::Mat I3 = img.clone();
+	const int side = 200;
+	const MyPoint bot(width * 0.5 - side / 2, height * 0.5 - side / 2), top(width * 0.5 + side / 2, height * 0.5 + side / 2);
+	const std::vector<int> rectIndices = kdtree.rectangleSearch(bot, top);
+	cv::Rect rect(width * 0.5 - side / 2, height * 0.5 - side / 2, side, side);
 	for (int i : rectIndices)
 		cv::circle(I3, cv::Point2d(points[i]), 1, cv::Scalar(255, 255, 0), -1);
 
-    
 	cv::rectangle(I3, rect, cv::Scalar(0, 0, 255));
 
-
-	cv::viz::Viz3d window; //creating a Viz window
-	//Displaying the Coordinate Origin (0,0,0)
+	cv::viz::Viz3d window; // creating a Viz window
+	// Displaying the Coordinate Origin (0,0,0)
 	window.showWidget("coordinate", cv::viz::WCoordinateSystem(100));
-	//Displaying the 3D points in green
-	//window.showWidget("points", cv::viz::WCloud(pts3d, viz::Color::green()));
+	// Displaying the 3D points in green
+	// window.showWidget("points", cv::viz::WCloud(pts3d, viz::Color::green()));
 	window.spin();
 
 	// show results
@@ -111,7 +108,6 @@ int main(int argc, char **argv)
 	cv::imshow("K-nearest neigbors search (k = 10)", I1);
 	cv::imshow("Radius search (radius = 50)", I2);
 	cv::imshow("Rectangle search (side = 100)", I3);
-
 
 	cv::waitKey(0);
 

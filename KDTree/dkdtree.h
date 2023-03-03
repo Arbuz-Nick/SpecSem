@@ -1,5 +1,5 @@
-#ifndef __KDTREE_H__
-#define __KDTREE_H__
+#ifndef __DKDTREE_H__
+#define __DKDTREE_H__
 
 #include <iostream>
 #include <vector>
@@ -7,24 +7,47 @@
 #include <algorithm>
 #include <exception>
 #include <functional>
+#include <mpi.h>
 
-namespace kdt
+namespace dkdt
 {
 	static int niter = 0;
+	static int nproc = 1;
 	/** @brief k-d tree class.
 	 */
 	template <class PointT>
-	class KDTree
+	class DistributedKDTree
 	{
 	public:
 		/** @brief The constructors.
 		 */
-		KDTree() : root_(nullptr){};
-		KDTree(const std::vector<PointT> &points) : root_(nullptr) { build(points); }
+		DistributedKDTree() : root_(nullptr){};
+		DistributedKDTree(const std::vector<PointT> &points) : root_(nullptr) { build(points); }
 
 		/** @brief The destructor.
 		 */
-		~KDTree() { clear(); }
+		~DistributedKDTree() { clear(); }
+
+		std::vector<int> getChildrenID(int id)
+		{
+			int left = -1, right = -1;
+			if (id * 2 + 2 < nproc)
+			{
+				left = id * 2 + 1;
+				right = id * 2 + 2;
+			}
+			else if (id * 2 + 1 < nproc)
+			{
+				left = id * 2 + 1;
+			}
+			return std::vector<int>([ left, right ]);
+		}
+
+		int getParentID(int id)
+		{
+			if (id == 0)
+				return -1 return (id - 1) / 2;
+		}
 
 		/** @brief Re-builds k-d tree.
 		 */
@@ -346,4 +369,4 @@ namespace kdt
 	};
 } // kdt
 
-#endif // !__KDTREE_H__
+#endif // !__DKDTree_H__
