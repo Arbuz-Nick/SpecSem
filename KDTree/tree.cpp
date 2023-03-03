@@ -226,7 +226,7 @@ int main(int argc, char *argv[])
         bench_timer_start();
         std::cout << "My rank: " << rank << ", Got from " << parent_rank << ", data size: " << points.size() << std::endl;
         kdt::KDTree<MyPoint3D> kdtree(points);
-        cv::viz::Viz3d window;
+        /*cv::viz::Viz3d window;
         std::vector<cv::Point3d> points_3d_(points.size());
         for (int i = 0; i < points.size(); i++)
             points_3d_[i] = points[i];
@@ -235,14 +235,16 @@ int main(int argc, char *argv[])
         cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
         point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
         window.showWidget("points", point_cloud);
-
-        const MyPoint3D bot_3d((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2), top_3d((width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
+        */
+        const MyPoint3D bot_3d((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2),
+            top_3d((width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
+        /*
         cv::viz::WCube cube = cv::viz::WCube(bot_3d, top_3d, true, cv::viz::Color::blue());
         cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
         window.showWidget("cube", cube);
-
+        */
         const std::vector<int> cubeIndices = kdtree.rectangleSearch(bot_3d, top_3d);
-        std::vector<cv::Point3d> found_points_3d;
+        /*std::vector<cv::Point3d> found_points_3d;
         for (auto i : cubeIndices)
         {
             found_points_3d.push_back(points_3d_[i]);
@@ -254,11 +256,16 @@ int main(int argc, char *argv[])
             window.showWidget("found_points", found_cloud);
         }
         // std::cout << points_3d[10][0] << std::endl;
+        */
         bench_timer_stop();
         // std::cout << "My rank: " << rank << ", Iter per point: " << double(kdt::niter) / points.size() << std::endl;
         double t = bench_t_end - bench_t_start;
         MPI_Send(&t, 1, MPI_DOUBLE, parent_rank, 1, MPI_COMM_WORLD);
-        window.spin();
+        int i_size = cubeIndices.size();
+        MPI_Send(&i_size, 1, MPI_INT, parent_rank, 1, MPI_COMM_WORLD);
+        MPI_Send(cubeIndices.data(), i_size, MPI_INT, parent_rank, 1, MPI_COMM_WORLD);
+
+        // window.spin();
     }
     else
     {
@@ -277,7 +284,67 @@ int main(int argc, char *argv[])
             MPI_Send(&max_t, 1, MPI_DOUBLE, parent_rank, 1, MPI_COMM_WORLD);
         else
             printf("Rank: %d: Max time in seconds = %0.10lf\n", rank, max_t);
+
+        int r_size = 0, l_size = 0;
+        std::vector<int> indexes;
+        if (right_child != -1)
+        {
+            MPI_Recv(&l_size, 1, MPI_INT, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            for (int i = 0; i < l_size; i++)
+                indexes.push_back(0);
+            MPI_Recv(indexes.data(), l_size, MPI_INT, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+            MPI_Recv(&r_size, 1, MPI_INT, right_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            for (int i = 0; i < r_size; i++)
+                indexes.push_back(0);
+            MPI_Recv(indexes.data() + l_size, r_size, MPI_INT, right_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        }
+        else
+        {
+            MPI_Recv(&l_size, 1, MPI_INT, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            for (int i = 0; i < l_size; i++)
+                indexes.push_back(0);
+            MPI_Recv(indexes.data(), l_size, MPI_INT, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        }
+        if (parent_rank != -1)
+        {
+            int i_size = indexes.size();
+            MPI_Send(&i_size, 1, MPI_INT, parent_rank, 1, MPI_COMM_WORLD);
+            MPI_Send(indexes.data(), i_size, MPI_INT, parent_rank, 1, MPI_COMM_WORLD);
+        }
+        else
+        {
+            //printf("Rank: %d: Max time in seconds = %0.10lf\n", rank, max_t);
+            cv::viz::Viz3d window;
+            std::vector<cv::Point3d> points_3d_(points.size());
+            for (int i = 0; i < points.size(); i++)
+                points_3d_[i] = points[i];
+            if (points_3d_.empty())
+                std::cout << "My rank: " << rank << "Cloud is empty\n";
+            cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
+            point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
+            window.showWidget("points", point_cloud);
+
+            const MyPoint3D bot_3d((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2), top_3d((width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
+            cv::viz::WCube cube = cv::viz::WCube(bot_3d, top_3d, true, cv::viz::Color::blue());
+            cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
+            window.showWidget("cube", cube);
+
+            std::vector<cv::Point3d> found_points_3d;
+            for (auto i : indexes)
+            {
+                found_points_3d.push_back(points_3d_[i]);
+            }
+            if (!found_points_3d.empty())
+            {
+                cv::viz::WCloud found_cloud = cv::viz::WCloud(found_points_3d, cv::viz::Color::red());
+                found_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
+                window.showWidget("found_points", found_cloud);
+            }
+            window.spin();
+        }
     }
+    /*
     if (rank == 0)
     {
         bench_timer_start();
@@ -315,6 +382,7 @@ int main(int argc, char *argv[])
         std::cout << "My rank: " << rank << ", Iter per point: " << double(kdt::niter) / points.size() << std::endl;
         double t = bench_timer_print(rank);
     }
+    */
     MPI_Barrier(MPI_COMM_WORLD);
     MPI_Type_free(&point_type);
     MPI_Finalize();
