@@ -129,29 +129,29 @@ kdtree/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/build
 .PHONY : kdtree/fast
 
-test3d.o: test3d.cpp.o
-.PHONY : test3d.o
+tree.o: tree.cpp.o
+.PHONY : tree.o
 
 # target to build an object file
-test3d.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/test3d.cpp.o
-.PHONY : test3d.cpp.o
+tree.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/tree.cpp.o
+.PHONY : tree.cpp.o
 
-test3d.i: test3d.cpp.i
-.PHONY : test3d.i
+tree.i: tree.cpp.i
+.PHONY : tree.i
 
 # target to preprocess a source file
-test3d.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/test3d.cpp.i
-.PHONY : test3d.cpp.i
+tree.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/tree.cpp.i
+.PHONY : tree.cpp.i
 
-test3d.s: test3d.cpp.s
-.PHONY : test3d.s
+tree.s: tree.cpp.s
+.PHONY : tree.s
 
 # target to generate assembly for a file
-test3d.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/test3d.cpp.s
-.PHONY : test3d.cpp.s
+tree.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/tree.cpp.s
+.PHONY : tree.cpp.s
 
 # Help Target
 help:
@@ -162,9 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... kdtree"
-	@echo "... test3d.o"
-	@echo "... test3d.i"
-	@echo "... test3d.s"
+	@echo "... tree.o"
+	@echo "... tree.i"
+	@echo "... tree.s"
 .PHONY : help
 
 

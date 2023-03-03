@@ -4,7 +4,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /usr/local/Cellar/opencv/4.6.0_1/include/opencv4
+CXX_INCLUDES = -I/usr/local/Cellar/mpich/4.0.3/include -isystem /usr/local/Cellar/opencv/4.6.0_1/include/opencv4
 
 CXX_FLAGS =  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.1 -std=gnu++11
 
