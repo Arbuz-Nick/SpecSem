@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/Users/anr/Desktop/SpecSem/SpecSem/KDTree")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/Users/anr/Desktop/SpecSem/SpecSem/KDTree/build")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/Users/anr/Desktop/SpecSem/SpecSem/KDTree/built")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)
