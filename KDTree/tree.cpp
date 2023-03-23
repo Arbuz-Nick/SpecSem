@@ -1,5 +1,7 @@
 #include "mpi.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -107,7 +109,7 @@ int handler(MyPoint3D lhs, MyPoint3D rhs)
     return lhs[axis] < rhs[axis];
 }
 
-void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int cloud_size)
+void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int cloud_size = -1, std::string path = "")
 {
     int lvl = std::log2(rank + 1);
 
@@ -129,16 +131,43 @@ void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int clo
 
     if (rank == 0)
     {
-        for (int i = 0; i < cloud_size; i++)
+        if (path == "")
+            if (cloud_size == -1)
+            {
+                std::cout << "ERROR:: Can't build cloud of such size" << std::endl;
+                return;
+            }
+            else
+                for (int i = 0; i < cloud_size; i++)
+                {
+                    const int x = rand() % width;
+                    const int y = rand() % height;
+                    const int z = rand() % deep;
+                    points.push_back(MyPoint3D(x, y, z));
+                }
+        else
         {
-            const int x = rand() % width;
-            const int y = rand() % height;
-            const int z = rand() % deep;
-            points.push_back(MyPoint3D(x, y, z));
+            double x, y, z;
+            std::ifstream file;
+            file.open(path);
+            if (!file.is_open())
+            {
+                std::cout << "File opening error\n"
+                          << path << std::endl;
+                return;
+            }
+            std::cout << "Start to read the file" << std::endl;
+            while (!file.eof())
+            {
+                file >> x >> y >> z;
+                points.push_back(MyPoint3D(x, y, z));
+            }
         }
+
         npoints = points.size();
 
-        std::cout << "Main is sending\n";
+        std::cout << "Main is sending\n"
+                  << npoints << std::endl;
         if (right_child != -1)
         {
 
@@ -214,16 +243,9 @@ void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int clo
     }
 }
 
-int main(int argc, char *argv[])
+void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<MyPoint3D> &points)
 {
-    MPI_Init(&argc, &argv);
-
-    MPI_Comm_size(MPI_COMM_WORLD, &process_num);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-    MPI_Datatype point_type = MyPoint3D::create_mpi_datatype();
     int lvl = std::log2(rank + 1);
-
     int parent_rank = get_parent(rank);
     int left_child = rank * 2 + 1;
     int right_child = rank * 2 + 2;
@@ -236,23 +258,13 @@ int main(int argc, char *argv[])
     {
         right_child = -1;
     }
+    std::cout << "My rank: " << rank << ", left: " << left_child << ", right: " << right_child << std::endl;
 
-    std::vector<MyPoint3D> points;
-    if (rank == 0)
-        bench_timer_start();
-    MPI_kdtree(point_type, points, 10000);
-    if (rank == 0)
-    {
-        bench_timer_stop();
-        std::cout << "Built time: " << bench_t_end - bench_t_start << std::endl;
-        bench_timer_start();
-    }
-
+    // std::cout << "My rank: " << rank << ", Got from " << parent_rank << ", lvl: " << lvl << std::endl;
     if (lvl == int(std::log2(process_num)))
     {
-        MyPoint3D borders[2];
         MPI_Recv(borders, 2, point_type, parent_rank, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        std::cout << "My rank: " << rank << ", Got from " << parent_rank << ", data size: " << points.size() << std::endl;
+        std::cout << "My rank: " << rank << ", Got from " << parent_rank << ", border: " << borders[0][0] << std::endl;
         kdt::KDTree<MyPoint3D> kdtree(points);
         /*std::vector<cv::Point3d> points_3d_(points.size());
         for (int i = 0; i < points.size(); i++)
@@ -263,10 +275,11 @@ int main(int argc, char *argv[])
         point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
         window.showWidget("points", point_cloud);
         */
-        cv::viz::Viz3d window(std::to_string(rank));
-        cv::viz::WCube cube = cv::viz::WCube(borders[0], borders[1], true, cv::viz::Color::blue());
-        cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
-        window.showWidget("cube", cube);
+
+        // cv::viz::Viz3d window(std::to_string(rank));
+        // cv::viz::WCube cube = cv::viz::WCube(borders[0], borders[1], true, cv::viz::Color::blue());
+        // cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
+        // window.showWidget("cube", cube);
 
         const std::vector<int> cubeIndices = kdtree.rectangleSearch(borders[0], borders[1]);
         std::vector<MyPoint3D> found_points_3d;
@@ -274,7 +287,7 @@ int main(int argc, char *argv[])
         {
             found_points_3d.push_back(points[i]);
         }
-
+        /*
         std::vector<cv::Point3d> points_3d_(found_points_3d.size());
         for (int i = 0; i < found_points_3d.size(); i++)
             points_3d_[i] = found_points_3d[i];
@@ -284,76 +297,41 @@ int main(int argc, char *argv[])
             found_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
             window.showWidget("found_points", found_cloud);
         }
-
+        */
         // std::cout << points_3d[10][0] << std::endl;
 
         // std::cout << "My rank: " << rank << ", Iter per point: " << double(kdt::niter) / points.size() << std::endl;
-        double t = bench_t_end - bench_t_start;
         if (parent_rank != -1)
         {
-            MPI_Send(&t, 1, MPI_DOUBLE, parent_rank, 1, MPI_COMM_WORLD);
             int i_size = found_points_3d.size();
             MPI_Send(&i_size, 1, MPI_INT, parent_rank, 1, MPI_COMM_WORLD);
             MPI_Send(found_points_3d.data(), i_size, point_type, parent_rank, 1, MPI_COMM_WORLD);
         }
-        window.showWidget("Coordinate Widget", cv::viz::WCoordinateSystem());
-        window.spin();
+        // window.showWidget("Coordinate Widget", cv::viz::WCoordinateSystem());
+        // window.spin();
     }
     else
     {
 
-        MyPoint3D borders[2];
-        if (rank == 0)
-        {
-            borders[0] = MyPoint3D((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2);
-            borders[1] = MyPoint3D((width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
-            if (right_child != -1)
-            {
-                if (borders[0][axis] <= left_border[1])
-                    MPI_Send(borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
-                if (borders[1][axis] >= right_border[0])
-                    MPI_Send(borders, 2, point_type, right_child, 1, MPI_COMM_WORLD);
-            }
-            else
-            {
-                MPI_Send(borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
-            }
-        }
-        else
+        if (rank != 0)
         {
             MPI_Recv(borders, 2, point_type, parent_rank, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            if (right_child != -1)
-            {
-                if (borders[0][axis] <= left_border[1])
-                    MPI_Send(borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
-                if (borders[1][axis] >= right_border[0])
-                    MPI_Send(borders, 2, point_type, right_child, 1, MPI_COMM_WORLD);
-            }
-            else
-            {
-                MPI_Send(borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
-            }
         }
-
-        // Получение времени
-        double r_t = 0, l_t = 0;
+        else
+            std::cout << "My rank: " << rank << ", data size: " << points.size() << std::endl;
         if (right_child != -1)
         {
-            MPI_Recv(&l_t, 1, MPI_DOUBLE, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            MPI_Recv(&r_t, 1, MPI_DOUBLE, right_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            if (borders[0][axis] <= left_border[1])
+                MPI_Send(borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
+            if (borders[1][axis] >= right_border[0])
+                MPI_Send(borders, 2, point_type, right_child, 1, MPI_COMM_WORLD);
         }
         else
         {
-            MPI_Recv(&l_t, 1, MPI_DOUBLE, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            std::cout << "My rank: " << rank << ", send to: " << left_child << right_border << std::endl;
+            MPI_Send(borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
         }
-        double max_t = std::max(l_t, r_t);
-        if (parent_rank != -1)
-            MPI_Send(&max_t, 1, MPI_DOUBLE, parent_rank, 1, MPI_COMM_WORLD);
-        else
-        {
-            bench_timer_stop();
-            printf("Rank: %d: Total time getting in seconds = %0.10lf\n", rank, bench_t_end - bench_t_start);
-        }
+
         // Очистка большого облака точек
         points.clear();
         points.shrink_to_fit();
@@ -362,15 +340,20 @@ int main(int argc, char *argv[])
         int r_size = 0, l_size = 0;
         if (right_child != -1)
         {
-            MPI_Recv(&l_size, 1, MPI_INT, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            for (int i = 0; i < l_size; i++)
-                points.push_back(MyPoint3D());
-            MPI_Recv(points.data(), l_size, point_type, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-            MPI_Recv(&r_size, 1, MPI_INT, right_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            for (int i = 0; i < r_size; i++)
-                points.push_back(MyPoint3D());
-            MPI_Recv(points.data() + l_size, r_size, point_type, right_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            if (borders[0][axis] <= left_border[1])
+            {
+                MPI_Recv(&l_size, 1, MPI_INT, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                for (int i = 0; i < l_size; i++)
+                    points.push_back(MyPoint3D());
+                MPI_Recv(points.data(), l_size, point_type, left_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            }
+            if (borders[1][axis] >= right_border[0])
+            {
+                MPI_Recv(&r_size, 1, MPI_INT, right_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                for (int i = 0; i < r_size; i++)
+                    points.push_back(MyPoint3D());
+                MPI_Recv(points.data() + l_size, r_size, point_type, right_child, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            }
         }
         else
         {
@@ -385,31 +368,27 @@ int main(int argc, char *argv[])
             MPI_Send(&size, 1, MPI_INT, parent_rank, 1, MPI_COMM_WORLD);
             MPI_Send(points.data(), size, point_type, parent_rank, 1, MPI_COMM_WORLD);
         }
-        if (rank == 0)
-        {
-            bench_timer_stop();
-            printf("Rank: %d: Total points getting in seconds = %0.10lf\n", rank, bench_t_end - bench_t_start);
-        }
 
         // else
         //{
         //  printf("Rank: %d: Max time in seconds = %0.10lf\n", rank, max_t);
-        cv::viz::Viz3d window(std::to_string(rank));
+        /*cv::viz::Viz3d window(std::to_string(rank));
         std::vector<cv::Point3d> points_3d_(points.size());
         for (int i = 0; i < points.size(); i++)
             points_3d_[i] = points[i];
         if (points_3d_.empty())
             std::cout << "My rank: " << rank << "Cloud is empty\n";
-        cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
-        point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
-        window.showWidget("points", point_cloud);
+        */
+        // cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
+        // point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
+        // window.showWidget("points", point_cloud);
 
-        const MyPoint3D bot_3d((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2), top_3d((width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
-        cv::viz::WCube cube = cv::viz::WCube(bot_3d, top_3d, true, cv::viz::Color::blue());
-        cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
-        window.showWidget("cube", cube);
-        window.showWidget("Coordinate Widget", cv::viz::WCoordinateSystem());
-        // std::vector<cv::Point3d> found_points_3d;
+        // const MyPoint3D bot_3d((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2), top_3d((width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
+        // cv::viz::WCube cube = cv::viz::WCube(bot_3d, top_3d, true, cv::viz::Color::blue());
+        // cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
+        // window.showWidget("cube", cube);
+        // window.showWidget("Coordinate Widget", cv::viz::WCoordinateSystem());
+        //  std::vector<cv::Point3d> found_points_3d;
         /*for (auto i : indexes)
         {
             found_points_3d.push_back(points_3d_[i]);
@@ -420,9 +399,78 @@ int main(int argc, char *argv[])
             found_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
             window.showWidget("found_points", found_cloud);
         }*/
-        window.spin();
-        //}
+        // window.spin();
+        // }
     }
+}
+
+int main(int argc, char *argv[])
+{   
+    std::srand(std::time(NULL));
+    MPI_Init(&argc, &argv);
+
+    MPI_Comm_size(MPI_COMM_WORLD, &process_num);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+    MPI_Datatype point_type = MyPoint3D::create_mpi_datatype();
+
+    std::vector<MyPoint3D> points;
+    if (rank == 0)
+        bench_timer_start();
+    MPI_kdtree(point_type, points, -1, "./../data/result.xyz");
+    MPI_Barrier(MPI_COMM_WORLD);
+    MyPoint3D borders[2];
+    if (rank == 0)
+    {
+        bench_timer_stop();
+        std::cout << "Built time: " << bench_t_end - bench_t_start << std::endl;
+        bench_timer_start();
+        MyPoint3D p = points[std::rand() % points.size()];
+        borders[0] = p; //MyPoint3D((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2);
+        borders[1] = MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500); //(width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
+        cv::viz::Viz3d window;
+        std::vector<cv::Point3d> points_3d_(points.size());
+        for (int i = 0; i < points.size(); i++)
+            points_3d_[i] = points[i];
+        if (points_3d_.empty())
+            std::cout << "My rank: " << rank << "Cloud is empty\n";
+        cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
+        point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
+        window.showWidget("points", point_cloud);
+        //const MyPoint3D bot_3d((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2), top_3d((width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
+        cv::viz::WCube cube = cv::viz::WCube(borders[0], borders[1], true, cv::viz::Color::blue());
+        cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
+        window.showWidget("cube", cube);
+        window.spin();
+    }
+
+    rectangleSearch(point_type, borders, points);
+
+    if (rank == 0)
+    {
+        bench_timer_stop();
+        std::cout << "Searching time: " << bench_t_end - bench_t_start << std::endl;
+
+        cv::viz::Viz3d window;
+        cv::viz::WCube cube = cv::viz::WCube(borders[0], borders[1], true, cv::viz::Color::blue());
+        cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
+        window.showWidget("cube", cube);
+
+        std::vector<cv::Point3d> points_3d_(points.size());
+        for (int i = 0; i < points.size(); i++)
+            points_3d_[i] = points[i];
+        if (points_3d_.empty())
+            std::cout << "My rank: " << rank << "Cloud is empty\n";
+        else
+        {
+            cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
+            point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
+            window.showWidget("points", point_cloud);
+        }
+
+        window.spin();
+    }
+
     /*
     if (rank == 0)
     {
