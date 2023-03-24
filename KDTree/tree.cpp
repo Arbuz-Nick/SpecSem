@@ -21,8 +21,8 @@
 #include <sys/types.h>
 #include <signal.h>
 
-#include <opencv2/opencv.hpp>
-#include <opencv2/viz/viz3d.hpp>
+// #include <opencv2/opencv.hpp>
+// #include <opencv2/viz/viz3d.hpp>
 
 int axis = 0;
 int process_num, rank;
@@ -38,6 +38,7 @@ int p_width = 2;
 int l_width = 3;
 double bench_t_start, bench_t_end;
 double left_border[2], right_border[2];
+double build_time, search_time;
 
 static double rtclock()
 {
@@ -91,7 +92,7 @@ public:
     }
 
     // conversion to OpenCV Point2d
-    operator cv::Point3d() const { return cv::Point3d((*this)[0], (*this)[1], (*this)[2]); }
+    // operator cv::Point3d() const { return cv::Point3d((*this)[0], (*this)[1], (*this)[2]); }
 
     static MPI_Datatype create_mpi_datatype()
     {
@@ -241,6 +242,11 @@ void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int clo
             MPI_Send(points.data(), npoints, point_type, left_child, 1, MPI_COMM_WORLD);
         }
     }
+    if (lvl != int(std::log2(process_num)))
+    {
+        points.clear();
+        points.shrink_to_fit();
+    }
 }
 
 void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<MyPoint3D> &points)
@@ -258,13 +264,14 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
     {
         right_child = -1;
     }
-    std::cout << "My rank: " << rank << ", left: " << left_child << ", right: " << right_child << std::endl;
-
     // std::cout << "My rank: " << rank << ", Got from " << parent_rank << ", lvl: " << lvl << std::endl;
     if (lvl == int(std::log2(process_num)))
     {
-        MPI_Recv(borders, 2, point_type, parent_rank, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        std::cout << "My rank: " << rank << ", Got from " << parent_rank << ", border: " << borders[0][0] << std::endl;
+
+        if (parent_rank != -1)
+            MPI_Recv(borders, 2, point_type, parent_rank, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        if ((borders[0][0] == borders[1][0]) && (borders[0][1] == borders[1][1]) && (borders[0][2] == borders[1][2]))
+            return;
         kdt::KDTree<MyPoint3D> kdtree(points);
         /*std::vector<cv::Point3d> points_3d_(points.size());
         for (int i = 0; i < points.size(); i++)
@@ -321,20 +328,33 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
             std::cout << "My rank: " << rank << ", data size: " << points.size() << std::endl;
         if (right_child != -1)
         {
-            if (borders[0][axis] <= left_border[1])
+            if ((borders[0][axis] <= left_border[1]) || (rank != 0))
                 MPI_Send(borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
-            if (borders[1][axis] >= right_border[0])
+            else
+            {
+                MyPoint3D not_borders[2];
+                not_borders[0] = borders[1];
+                not_borders[1] = borders[1];
+                MPI_Send(not_borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
+            }
+            if ((borders[1][axis] >= right_border[0]) || (rank != 0))
                 MPI_Send(borders, 2, point_type, right_child, 1, MPI_COMM_WORLD);
+            else
+            {
+                MyPoint3D not_borders[2];
+                not_borders[0] = borders[1];
+                not_borders[1] = borders[1];
+                MPI_Send(not_borders, 2, point_type, right_child, 1, MPI_COMM_WORLD);
+            }
         }
         else
         {
-            std::cout << "My rank: " << rank << ", send to: " << left_child << right_border << std::endl;
+            // std::cout << "My rank: " << rank << ", send to: " << left_child << right_border << std::endl;
             MPI_Send(borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
         }
 
-        // Очистка большого облака точек
-        points.clear();
-        points.shrink_to_fit();
+        if ((borders[0][0] == borders[1][0]) && (borders[0][1] == borders[1][1]) && (borders[0][2] == borders[1][2]))
+            return;
 
         // Получение точек
         int r_size = 0, l_size = 0;
@@ -405,8 +425,25 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
 }
 
 int main(int argc, char *argv[])
-{   
+{
     std::srand(std::time(NULL));
+
+    int point_number = -1;
+    std::string path = "";
+
+    switch (argv[1][0])
+    {
+    case 'd':
+        path = "./data/Fantasy Dragon.xyz";
+        break;
+    case 'f':
+        path = "./data/Bearded guy.xyz";
+        break;
+    default:
+        sscanf(argv[1], "%d", &point_number);
+        break;
+    }
+
     MPI_Init(&argc, &argv);
 
     MPI_Comm_size(MPI_COMM_WORLD, &process_num);
@@ -417,17 +454,19 @@ int main(int argc, char *argv[])
     std::vector<MyPoint3D> points;
     if (rank == 0)
         bench_timer_start();
-    MPI_kdtree(point_type, points, -1, "./../data/result.xyz");
+    MPI_kdtree(point_type, points, point_number, path);
     MPI_Barrier(MPI_COMM_WORLD);
     MyPoint3D borders[2];
     if (rank == 0)
     {
         bench_timer_stop();
         std::cout << "Built time: " << bench_t_end - bench_t_start << std::endl;
+        build_time = bench_t_end - bench_t_start;
         bench_timer_start();
         MyPoint3D p = points[std::rand() % points.size()];
-        borders[0] = p; //MyPoint3D((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2);
-        borders[1] = MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500); //(width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
+        borders[0] = p;
+        borders[1] = MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
+        /*
         cv::viz::Viz3d window;
         std::vector<cv::Point3d> points_3d_(points.size());
         for (int i = 0; i < points.size(); i++)
@@ -442,6 +481,7 @@ int main(int argc, char *argv[])
         cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
         window.showWidget("cube", cube);
         window.spin();
+        */
     }
 
     rectangleSearch(point_type, borders, points);
@@ -450,7 +490,12 @@ int main(int argc, char *argv[])
     {
         bench_timer_stop();
         std::cout << "Searching time: " << bench_t_end - bench_t_start << std::endl;
-
+        search_time = bench_t_end - bench_t_start;
+        std::ofstream out_file;
+        out_file.open("result_mpi_polus.csv");
+        out_file << build_time << ";" << search_time << ";" << process_num << ";" << argv[1] << std::endl;
+        out_file.close();
+        /*
         cv::viz::Viz3d window;
         cv::viz::WCube cube = cv::viz::WCube(borders[0], borders[1], true, cv::viz::Color::blue());
         cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
@@ -469,6 +514,7 @@ int main(int argc, char *argv[])
         }
 
         window.spin();
+        */
     }
 
     /*

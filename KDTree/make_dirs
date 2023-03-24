@@ -1,0 +1,13 @@
+#! /bin/bash
+
+rm -rf ./err_files
+rm -rf ./out_files
+
+mkdir ./err_files
+mkdir ./out_files
+
+for i in d f 1000 10000 100000
+do 
+mkdir ./err_files/$i
+mkdir ./out_files/$i
+done
