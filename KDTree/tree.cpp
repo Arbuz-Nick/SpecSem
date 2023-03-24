@@ -242,7 +242,7 @@ void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int clo
             MPI_Send(points.data(), npoints, point_type, left_child, 1, MPI_COMM_WORLD);
         }
     }
-    if (lvl != int(std::log2(process_num)))
+    if ((lvl != int(std::log2(process_num))) && (rank != 0))
     {
         points.clear();
         points.shrink_to_fit();
@@ -464,6 +464,8 @@ int main(int argc, char *argv[])
         build_time = bench_t_end - bench_t_start;
         bench_timer_start();
         MyPoint3D p = points[std::rand() % points.size()];
+        points.clear();
+        points.shrink_to_fit();
         borders[0] = p;
         borders[1] = MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
         /*
