@@ -426,7 +426,7 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
 
 int main(int argc, char *argv[])
 {
-    std::srand(std::time(NULL));
+    std::srand(time(NULL));
 
     int point_number = -1;
     std::string path = "";
@@ -492,7 +492,7 @@ int main(int argc, char *argv[])
         std::cout << "Searching time: " << bench_t_end - bench_t_start << std::endl;
         search_time = bench_t_end - bench_t_start;
         std::ofstream out_file;
-        out_file.open("result_mpi_polus.csv");
+        out_file.open("result_mpi_polus.csv", std::ios_base::app);
         out_file << build_time << ";" << search_time << ";" << process_num << ";" << argv[1] << std::endl;
         out_file.close();
         /*

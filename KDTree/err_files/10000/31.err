@@ -1,8 +1,36 @@
-[polus-c4-ib.bmc.hpc.cs.msu.ru:47569] 30 more processes have sent help message help-orte-odls-default.txt / execve error
-[polus-c4-ib.bmc.hpc.cs.msu.ru:47569] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-[polus-c4-ib.bmc.hpc.cs.msu.ru:48019] 30 more processes have sent help message help-orte-odls-default.txt / execve error
-[polus-c4-ib.bmc.hpc.cs.msu.ru:48019] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-[polus-c4-ib.bmc.hpc.cs.msu.ru:48477] 30 more processes have sent help message help-orte-odls-default.txt / execve error
-[polus-c4-ib.bmc.hpc.cs.msu.ru:48477] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-[polus-c4-ib.bmc.hpc.cs.msu.ru:49301] 30 more processes have sent help message help-orte-odls-default.txt / execve error
-[polus-c4-ib.bmc.hpc.cs.msu.ru:49301] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[polus-c2-ib:10071] *** Process received signal ***
+[polus-c2-ib:10071] Signal: Segmentation fault (11)
+[polus-c2-ib:10071] Signal code: Address not mapped (1)
+[polus-c2-ib:10071] Failing at address: 0xbef93b810
+[polus-c2-ib:10071] [ 0] [0x100000050478]
+[polus-c2-ib:10071] [ 1] ./prog[0x1000b4cc]
+[polus-c2-ib:10071] [ 2] /lib64/libc.so.6(+0x24980)[0x100000524980]
+[polus-c2-ib:10071] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000524b74]
+[polus-c2-ib:10071] *** End of error message ***
+[polus-c4-ib:60269] *** Process received signal ***
+[polus-c4-ib:60269] Signal: Segmentation fault (11)
+[polus-c4-ib:60269] Signal code: Address not mapped (1)
+[polus-c4-ib:60269] Failing at address: 0xdd893b90
+[polus-c4-ib:60269] [ 0] [0x100000050478]
+[polus-c4-ib:60269] [ 1] ./prog[0x1000b4cc]
+[polus-c4-ib:60269] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
+[polus-c4-ib:60269] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
+[polus-c4-ib:60269] *** End of error message ***
+[polus-c4-ib:60760] *** Process received signal ***
+[polus-c4-ib:60760] Signal: Segmentation fault (11)
+[polus-c4-ib:60760] Signal code: Address not mapped (1)
+[polus-c4-ib:60760] Failing at address: 0xa6214dab0
+[polus-c4-ib:60760] [ 0] [0x100000050478]
+[polus-c4-ib:60760] [ 1] ./prog[0x1000b4cc]
+[polus-c4-ib:60760] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
+[polus-c4-ib:60760] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
+[polus-c4-ib:60760] *** End of error message ***
+[polus-c4-ib:61226] *** Process received signal ***
+[polus-c4-ib:61226] Signal: Segmentation fault (11)
+[polus-c4-ib:61226] Signal code: Address not mapped (1)
+[polus-c4-ib:61226] Failing at address: 0x851d553f8
+[polus-c4-ib:61226] [ 0] [0x100000050478]
+[polus-c4-ib:61226] [ 1] ./prog[0x1000b4cc]
+[polus-c4-ib:61226] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
+[polus-c4-ib:61226] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
+[polus-c4-ib:61226] *** End of error message ***
