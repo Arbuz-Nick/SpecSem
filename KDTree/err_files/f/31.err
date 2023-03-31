@@ -1,36 +1,4 @@
-[polus-c4-ib:58824] *** Process received signal ***
-[polus-c4-ib:58824] Signal: Segmentation fault (11)
-[polus-c4-ib:58824] Signal code: Address not mapped (1)
-[polus-c4-ib:58824] Failing at address: 0x4867d4438
-[polus-c4-ib:58824] [ 0] [0x100000050478]
-[polus-c4-ib:58824] [ 1] ./prog[0x1000b4cc]
-[polus-c4-ib:58824] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
-[polus-c4-ib:58824] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
-[polus-c4-ib:58824] *** End of error message ***
-[polus-c4-ib:60085] *** Process received signal ***
-[polus-c4-ib:60085] Signal: Segmentation fault (11)
-[polus-c4-ib:60085] Signal code: Address not mapped (1)
-[polus-c4-ib:60085] Failing at address: 0xbc4f57f60
-[polus-c4-ib:60085] [ 0] [0x100000050478]
-[polus-c4-ib:60085] [ 1] ./prog[0x1000b4cc]
-[polus-c4-ib:60085] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
-[polus-c4-ib:60085] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
-[polus-c4-ib:60085] *** End of error message ***
-[polus-c4-ib:60534] *** Process received signal ***
-[polus-c4-ib:60534] Signal: Segmentation fault (11)
-[polus-c4-ib:60534] Signal code: Address not mapped (1)
-[polus-c4-ib:60534] Failing at address: 0x9058bc948
-[polus-c4-ib:60534] [ 0] [0x100000050478]
-[polus-c4-ib:60534] [ 1] ./prog[0x1000b4cc]
-[polus-c4-ib:60534] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
-[polus-c4-ib:60534] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
-[polus-c4-ib:60534] *** End of error message ***
-[polus-c4-ib:61040] *** Process received signal ***
-[polus-c4-ib:61040] Signal: Segmentation fault (11)
-[polus-c4-ib:61040] Signal code: Address not mapped (1)
-[polus-c4-ib:61040] Failing at address: 0xac3dd2430
-[polus-c4-ib:61040] [ 0] [0x100000050478]
-[polus-c4-ib:61040] [ 1] ./prog[0x1000b4cc]
-[polus-c4-ib:61040] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
-[polus-c4-ib:61040] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
-[polus-c4-ib:61040] *** End of error message ***
+mpiexec: Forwarding signal 12 to job
+User defined signal 2
+mpiexec: Forwarding signal 12 to job
+User defined signal 2

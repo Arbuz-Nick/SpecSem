@@ -1,36 +1,8 @@
-[polus-c4-ib:52572] *** Process received signal ***
-[polus-c4-ib:52572] Signal: Segmentation fault (11)
-[polus-c4-ib:52572] Signal code: Address not mapped (1)
-[polus-c4-ib:52572] Failing at address: 0x76c150f8
-[polus-c4-ib:52572] [ 0] [0x100000050478]
-[polus-c4-ib:52572] [ 1] ./prog[0x1000b4cc]
-[polus-c4-ib:52572] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
-[polus-c4-ib:52572] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
-[polus-c4-ib:52572] *** End of error message ***
-[polus-c4-ib:56558] *** Process received signal ***
-[polus-c4-ib:56558] Signal: Segmentation fault (11)
-[polus-c4-ib:56558] Signal code: Address not mapped (1)
-[polus-c4-ib:56558] Failing at address: 0x221fda0e0
-[polus-c4-ib:56558] [ 0] [0x100000050478]
-[polus-c4-ib:56558] [ 1] ./prog[0x1000b4cc]
-[polus-c4-ib:56558] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
-[polus-c4-ib:56558] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
-[polus-c4-ib:56558] *** End of error message ***
-[polus-c4-ib:57876] *** Process received signal ***
-[polus-c4-ib:57876] Signal: Segmentation fault (11)
-[polus-c4-ib:57876] Signal code: Address not mapped (1)
-[polus-c4-ib:57876] Failing at address: 0x8ba03a840
-[polus-c4-ib:57876] [ 0] [0x100000050478]
-[polus-c4-ib:57876] [ 1] ./prog[0x1000b4cc]
-[polus-c4-ib:57876] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
-[polus-c4-ib:57876] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
-[polus-c4-ib:57876] *** End of error message ***
-[polus-c4-ib:58353] *** Process received signal ***
-[polus-c4-ib:58353] Signal: Segmentation fault (11)
-[polus-c4-ib:58353] Signal code: Address not mapped (1)
-[polus-c4-ib:58353] Failing at address: 0x47182d148
-[polus-c4-ib:58353] [ 0] [0x100000050478]
-[polus-c4-ib:58353] [ 1] ./prog[0x1000b4cc]
-[polus-c4-ib:58353] [ 2] /lib64/libc.so.6(+0x24980)[0x100000534980]
-[polus-c4-ib:58353] [ 3] /lib64/libc.so.6(__libc_start_main+0xc4)[0x100000534b74]
-[polus-c4-ib:58353] *** End of error message ***
+[polus-c4-ib.bmc.hpc.cs.msu.ru:65626] 14 more processes have sent help message help-mpi-errors.txt / mpi_errors_are_fatal
+[polus-c4-ib.bmc.hpc.cs.msu.ru:65626] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[polus-c4-ib.bmc.hpc.cs.msu.ru:66869] 14 more processes have sent help message help-mpi-errors.txt / mpi_errors_are_fatal
+[polus-c4-ib.bmc.hpc.cs.msu.ru:66869] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[polus-c4-ib.bmc.hpc.cs.msu.ru:67657] 14 more processes have sent help message help-mpi-errors.txt / mpi_errors_are_fatal
+[polus-c4-ib.bmc.hpc.cs.msu.ru:67657] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[polus-c4-ib.bmc.hpc.cs.msu.ru:73405] 14 more processes have sent help message help-mpi-errors.txt / mpi_errors_are_fatal
+[polus-c4-ib.bmc.hpc.cs.msu.ru:73405] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
