@@ -251,6 +251,8 @@ void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int clo
 
 void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<MyPoint3D> &points)
 {
+    if (rank == 0)
+        std::cout << "My rank: " << rank << " Start searching" << std::endl;
     int lvl = std::log2(rank + 1);
     int parent_rank = get_parent(rank);
     int left_child = rank * 2 + 1;
@@ -426,6 +428,8 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
 
 int main(int argc, char *argv[])
 {
+    int seed;
+    sscanf(argv[2], "%d", &seed);
     std::srand(time(NULL));
 
     int point_number = -1;
@@ -454,6 +458,7 @@ int main(int argc, char *argv[])
     std::vector<MyPoint3D> points;
     if (rank == 0)
         bench_timer_start();
+
     MPI_kdtree(point_type, points, point_number, path);
     MPI_Barrier(MPI_COMM_WORLD);
     MyPoint3D borders[2];
@@ -558,8 +563,21 @@ int main(int argc, char *argv[])
         double t = bench_timer_print(rank);
     }
     */
-    MPI_Barrier(MPI_COMM_WORLD);
+    std::cout << "My rank: " << rank << " last barrier" << std::endl;
     MPI_Type_free(&point_type);
+    MPI_Barrier(MPI_COMM_WORLD);
+    if (rank % 2)
+    {
+        std::cout << "My rank: " << rank << " Send to: " << rank - 1 << std::endl;
+        MPI_Send(&rank, 1, MPI_INT, rank - 1, 0, MPI_COMM_WORLD);
+    }
+    else
+    {
+        int new_rank;
+        MPI_Recv(&new_rank, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        std::cout << "My rank: " << rank << " Recv from: " << new_rank << std::endl;
+    }
+    std::cout << "My rank: " << rank << " Finalize" << std::endl;
     MPI_Finalize();
     return 0;
 }
