@@ -129,29 +129,29 @@ kdtree/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/build
 .PHONY : kdtree/fast
 
-tree.o: tree.cpp.o
-.PHONY : tree.o
+tree_visualize.o: tree_visualize.cpp.o
+.PHONY : tree_visualize.o
 
 # target to build an object file
-tree.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/tree.cpp.o
-.PHONY : tree.cpp.o
+tree_visualize.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/tree_visualize.cpp.o
+.PHONY : tree_visualize.cpp.o
 
-tree.i: tree.cpp.i
-.PHONY : tree.i
+tree_visualize.i: tree_visualize.cpp.i
+.PHONY : tree_visualize.i
 
 # target to preprocess a source file
-tree.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/tree.cpp.i
-.PHONY : tree.cpp.i
+tree_visualize.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/tree_visualize.cpp.i
+.PHONY : tree_visualize.cpp.i
 
-tree.s: tree.cpp.s
-.PHONY : tree.s
+tree_visualize.s: tree_visualize.cpp.s
+.PHONY : tree_visualize.s
 
 # target to generate assembly for a file
-tree.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/tree.cpp.s
-.PHONY : tree.cpp.s
+tree_visualize.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/kdtree.dir/build.make CMakeFiles/kdtree.dir/tree_visualize.cpp.s
+.PHONY : tree_visualize.cpp.s
 
 # Help Target
 help:
@@ -162,9 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... kdtree"
-	@echo "... tree.o"
-	@echo "... tree.i"
-	@echo "... tree.s"
+	@echo "... tree_visualize.o"
+	@echo "... tree_visualize.i"
+	@echo "... tree_visualize.s"
 .PHONY : help
 
 

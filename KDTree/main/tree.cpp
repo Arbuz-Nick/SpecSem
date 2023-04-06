@@ -242,7 +242,7 @@ void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int clo
             MPI_Send(points.data(), npoints, point_type, left_child, 1, MPI_COMM_WORLD);
         }
     }
-    if ((lvl != int(std::log2(process_num))) && (rank != 0))
+    if ((left_child != -1) && (rank != 0))
     {
         points.clear();
         points.shrink_to_fit();
@@ -267,7 +267,7 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
         right_child = -1;
     }
     // std::cout << "My rank: " << rank << ", Got from " << parent_rank << ", lvl: " << lvl << std::endl;
-    if (lvl == int(std::log2(process_num)))
+    if (left_child == -1)
     {
 
         if (parent_rank != -1)
