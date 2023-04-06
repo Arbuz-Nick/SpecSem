@@ -1,3 +1,4 @@
+
 #! /bin/bash
 echo "BuildTime;SearchTime;Nthreads;data_type">result_mpi_polus.csv
 ./make_dirs

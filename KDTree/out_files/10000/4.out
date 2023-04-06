@@ -1,13 +1,13 @@
 Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
-Subject: Job 1038784: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000> in cluster <MSUCluster> Exited
+Subject: Job 1040340: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234> in cluster <MSUCluster> Exited
 
-Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Fri Mar 31 15:21:52 2023
-Job was executed on host(s) <4*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Fri Mar 31 15:22:15 2023
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Wed Apr  5 18:32:26 2023
+Job was executed on host(s) <4*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Wed Apr  5 18:32:36 2023
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree> was used as the working directory.
-Started at Fri Mar 31 15:22:15 2023
-Terminated at Fri Mar 31 15:22:17 2023
-Results reported at Fri Mar 31 15:22:17 2023
+Started at Wed Apr  5 18:32:36 2023
+Terminated at Wed Apr  5 18:32:38 2023
+Results reported at Wed Apr  5 18:32:38 2023
 
 Your job looked like:
 
@@ -19,37 +19,40 @@ source /polusfs/setenv/setup.SMPI
 #BSUB -W 00:30
 #BSUB -o ./out_files/10000/4.out
 #BSUB -e ./err_files/10000/4.err
-OMP_NUM_THREADS=1 mpiexec ./prog 10000
+OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234
 
 ------------------------------------------------------------
 
-Exited with exit code 6.
+Exited with exit code 213.
 
 Resource usage summary:
 
-    CPU time :                                   0.32 sec.
-    Max Memory :                                 222 MB
-    Average Memory :                             149.33 MB
+    CPU time :                                   0.34 sec.
+    Max Memory :                                 7 MB
+    Average Memory :                             5.67 MB
     Total Requested Memory :                     -
     Delta Memory :                               -
     Max Swap :                                   -
-    Max Processes :                              8
-    Max Threads :                                21
-    Run time :                                   2 sec.
-    Turnaround time :                            25 sec.
+    Max Processes :                              4
+    Max Threads :                                5
+    Run time :                                   3 sec.
+    Turnaround time :                            12 sec.
 
 The output (if any) follows:
 
-Main is sending
-10000
-[polus-c4-ib:45074] *** An error occurred in MPI_Send
-[polus-c4-ib:45074] *** reported by process [139132929,2]
-[polus-c4-ib:45074] *** on communicator MPI_COMM_WORLD
-[polus-c4-ib:45074] *** MPI_ERR_RANK: invalid rank
-[polus-c4-ib:45074] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
-[polus-c4-ib:45074] ***    and potentially your MPI job)
-Built time: 0.00728011
-My rank: 0, data size: 0
+--------------------------------------------------------------------------
+Open MPI tried to fork a new process via the "execve" system call but
+failed.  Open MPI checks many things before attempting to launch a
+child process, but nothing is perfect. This error may be indicative
+of another problem on the target host, or even something as silly as
+having specified a directory for your application. Your job will now
+abort.
+
+  Local host:        polus-c4-ib
+  Application name:  ./prog
+  Error:             Exec format error
+--------------------------------------------------------------------------
+4 total processes failed to start
 
 
 PS:
@@ -57,15 +60,15 @@ PS:
 Read file <./err_files/10000/4.err> for stderr output of this job.
 
 Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
-Subject: Job 1038814: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000> in cluster <MSUCluster> Exited
+Subject: Job 1040370: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234> in cluster <MSUCluster> Exited
 
-Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Fri Mar 31 15:21:54 2023
-Job was executed on host(s) <4*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Fri Mar 31 15:23:05 2023
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Wed Apr  5 18:32:27 2023
+Job was executed on host(s) <4*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Wed Apr  5 18:32:53 2023
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree> was used as the working directory.
-Started at Fri Mar 31 15:23:05 2023
-Terminated at Fri Mar 31 15:23:07 2023
-Results reported at Fri Mar 31 15:23:07 2023
+Started at Wed Apr  5 18:32:53 2023
+Terminated at Wed Apr  5 18:32:54 2023
+Results reported at Wed Apr  5 18:32:54 2023
 
 Your job looked like:
 
@@ -77,37 +80,101 @@ source /polusfs/setenv/setup.SMPI
 #BSUB -W 00:30
 #BSUB -o ./out_files/10000/4.out
 #BSUB -e ./err_files/10000/4.err
-OMP_NUM_THREADS=1 mpiexec ./prog 10000
+OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234
 
 ------------------------------------------------------------
 
-Exited with exit code 6.
+Exited with exit code 213.
 
 Resource usage summary:
 
     CPU time :                                   0.27 sec.
+    Max Memory :                                 11 MB
+    Average Memory :                             8.67 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                6
+    Run time :                                   3 sec.
+    Turnaround time :                            27 sec.
+
+The output (if any) follows:
+
+--------------------------------------------------------------------------
+Open MPI tried to fork a new process via the "execve" system call but
+failed.  Open MPI checks many things before attempting to launch a
+child process, but nothing is perfect. This error may be indicative
+of another problem on the target host, or even something as silly as
+having specified a directory for your application. Your job will now
+abort.
+
+  Local host:        polus-c4-ib
+  Application name:  ./prog
+  Error:             Exec format error
+--------------------------------------------------------------------------
+4 total processes failed to start
+
+
+PS:
+
+Read file <./err_files/10000/4.err> for stderr output of this job.
+
+Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
+Subject: Job 1040400: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234> in cluster <MSUCluster> Exited
+
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Wed Apr  5 18:32:28 2023
+Job was executed on host(s) <4*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Wed Apr  5 18:33:14 2023
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree> was used as the working directory.
+Started at Wed Apr  5 18:33:14 2023
+Terminated at Wed Apr  5 18:33:17 2023
+Results reported at Wed Apr  5 18:33:17 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
+source /polusfs/setenv/setup.SMPI
+#BSUB -n 4
+#BSUB -W 00:30
+#BSUB -o ./out_files/10000/4.out
+#BSUB -e ./err_files/10000/4.err
+OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234
+
+------------------------------------------------------------
+
+Exited with exit code 213.
+
+Resource usage summary:
+
+    CPU time :                                   0.23 sec.
     Max Memory :                                 1 MB
-    Average Memory :                             1.00 MB
+    Average Memory :                             0.33 MB
     Total Requested Memory :                     -
     Delta Memory :                               -
     Max Swap :                                   -
     Max Processes :                              1
     Max Threads :                                1
     Run time :                                   2 sec.
-    Turnaround time :                            73 sec.
+    Turnaround time :                            49 sec.
 
 The output (if any) follows:
 
-Main is sending
-10000
-[polus-c4-ib:46000] *** An error occurred in MPI_Send
-[polus-c4-ib:46000] *** reported by process [336723969,2]
-[polus-c4-ib:46000] *** on communicator MPI_COMM_WORLD
-[polus-c4-ib:46000] *** MPI_ERR_RANK: invalid rank
-[polus-c4-ib:46000] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
-[polus-c4-ib:46000] ***    and potentially your MPI job)
-Built time: 0.00714397
-My rank: 0, data size: 0
+--------------------------------------------------------------------------
+Open MPI tried to fork a new process via the "execve" system call but
+failed.  Open MPI checks many things before attempting to launch a
+child process, but nothing is perfect. This error may be indicative
+of another problem on the target host, or even something as silly as
+having specified a directory for your application. Your job will now
+abort.
+
+  Local host:        polus-c4-ib
+  Application name:  ./prog
+  Error:             Exec format error
+--------------------------------------------------------------------------
+4 total processes failed to start
 
 
 PS:
@@ -115,15 +182,15 @@ PS:
 Read file <./err_files/10000/4.err> for stderr output of this job.
 
 Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
-Subject: Job 1038844: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000> in cluster <MSUCluster> Exited
+Subject: Job 1040430: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234> in cluster <MSUCluster> Exited
 
-Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Fri Mar 31 15:21:55 2023
-Job was executed on host(s) <4*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Fri Mar 31 15:23:23 2023
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Wed Apr  5 18:32:30 2023
+Job was executed on host(s) <4*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Wed Apr  5 18:33:27 2023
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree> was used as the working directory.
-Started at Fri Mar 31 15:23:23 2023
-Terminated at Fri Mar 31 15:23:24 2023
-Results reported at Fri Mar 31 15:23:24 2023
+Started at Wed Apr  5 18:33:27 2023
+Terminated at Wed Apr  5 18:33:28 2023
+Results reported at Wed Apr  5 18:33:28 2023
 
 Your job looked like:
 
@@ -135,95 +202,40 @@ source /polusfs/setenv/setup.SMPI
 #BSUB -W 00:30
 #BSUB -o ./out_files/10000/4.out
 #BSUB -e ./err_files/10000/4.err
-OMP_NUM_THREADS=1 mpiexec ./prog 10000
+OMP_NUM_THREADS=1 mpiexec ./prog 10000 1234
 
 ------------------------------------------------------------
 
-Exited with exit code 6.
-
-Resource usage summary:
-
-    CPU time :                                   0.27 sec.
-    Max Memory :                                 1 MB
-    Average Memory :                             1.00 MB
-    Total Requested Memory :                     -
-    Delta Memory :                               -
-    Max Swap :                                   -
-    Max Processes :                              1
-    Max Threads :                                1
-    Run time :                                   1 sec.
-    Turnaround time :                            89 sec.
-
-The output (if any) follows:
-
-Main is sending
-10000
-[polus-c4-ib:46379] *** An error occurred in MPI_Send
-[polus-c4-ib:46379] *** reported by process [312999937,2]
-[polus-c4-ib:46379] *** on communicator MPI_COMM_WORLD
-[polus-c4-ib:46379] *** MPI_ERR_RANK: invalid rank
-[polus-c4-ib:46379] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
-[polus-c4-ib:46379] ***    and potentially your MPI job)
-Built time: 0.00727487
-My rank: 0, data size: 0
-
-
-PS:
-
-Read file <./err_files/10000/4.err> for stderr output of this job.
-
-Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
-Subject: Job 1038874: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000> in cluster <MSUCluster> Exited
-
-Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 4;#BSUB -W 00:30;#BSUB -o ./out_files/10000/4.out;#BSUB -e ./err_files/10000/4.err;OMP_NUM_THREADS=1 mpiexec ./prog 10000> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Fri Mar 31 15:21:56 2023
-Job was executed on host(s) <4*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Fri Mar 31 15:24:18 2023
-</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
-</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree> was used as the working directory.
-Started at Fri Mar 31 15:24:18 2023
-Terminated at Fri Mar 31 15:24:19 2023
-Results reported at Fri Mar 31 15:24:19 2023
-
-Your job looked like:
-
-------------------------------------------------------------
-# LSBATCH: User input
-# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
-source /polusfs/setenv/setup.SMPI
-#BSUB -n 4
-#BSUB -W 00:30
-#BSUB -o ./out_files/10000/4.out
-#BSUB -e ./err_files/10000/4.err
-OMP_NUM_THREADS=1 mpiexec ./prog 10000
-
-------------------------------------------------------------
-
-Exited with exit code 6.
+Exited with exit code 213.
 
 Resource usage summary:
 
     CPU time :                                   0.24 sec.
-    Max Memory :                                 71 MB
-    Average Memory :                             48.67 MB
+    Max Memory :                                 7 MB
+    Average Memory :                             7.00 MB
     Total Requested Memory :                     -
     Delta Memory :                               -
     Max Swap :                                   -
-    Max Processes :                              8
-    Max Threads :                                21
-    Run time :                                   2 sec.
-    Turnaround time :                            143 sec.
+    Max Processes :                              4
+    Max Threads :                                5
+    Run time :                                   1 sec.
+    Turnaround time :                            58 sec.
 
 The output (if any) follows:
 
-Main is sending
-10000
-[polus-c4-ib:47347] *** An error occurred in MPI_Send
-[polus-c4-ib:47347] *** reported by process [526581761,2]
-[polus-c4-ib:47347] *** on communicator MPI_COMM_WORLD
-[polus-c4-ib:47347] *** MPI_ERR_RANK: invalid rank
-[polus-c4-ib:47347] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
-[polus-c4-ib:47347] ***    and potentially your MPI job)
-Built time: 0.00695395
-My rank: 0, data size: 0
+--------------------------------------------------------------------------
+Open MPI tried to fork a new process via the "execve" system call but
+failed.  Open MPI checks many things before attempting to launch a
+child process, but nothing is perfect. This error may be indicative
+of another problem on the target host, or even something as silly as
+having specified a directory for your application. Your job will now
+abort.
+
+  Local host:        polus-c4-ib
+  Application name:  ./prog
+  Error:             Exec format error
+--------------------------------------------------------------------------
+4 total processes failed to start
 
 
 PS:
