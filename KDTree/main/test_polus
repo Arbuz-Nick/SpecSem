@@ -10,7 +10,7 @@ for j in d f 1000 10000 100000
 do
 for ((i = 1; i <= 32; i *= 2))
 do
-mpisubmit.pl -p $i -w 00:30 --stdout ./out_files/$j/$i.out --stderr ./err_files/$j/$i.err ./prog -- $j 1234
+mpisubmit.pl -p $i -w 00:30 --stdout ./out_files/$j/$i.out --stderr ./err_files/$j/$i.err ./prog -- $j 10
 done
 done
 done
@@ -21,7 +21,7 @@ for j in d f 1000 10000 100000
 do
 for i in 3 7 15 31
 do
-mpisubmit.pl -p $i -w 00:30 --stdout ./out_files/$j/$i.out --stderr ./err_files/$j/$i.err ./prog -- $j 1234
+mpisubmit.pl -p $i -w 00:30 --stdout ./out_files/$j/$i.out --stderr ./err_files/$j/$i.err ./prog -- $j 10
 done
 done
 done
