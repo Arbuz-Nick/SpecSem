@@ -242,8 +242,21 @@ void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int clo
             MPI_Send(points.data(), npoints, point_type, left_child, 1, MPI_COMM_WORLD);
         }
     }
+
+    cv::viz::Viz3d window(std::to_string(rank));
+    std::vector<cv::Point3d> points_3d_(points.size());
+    for (int i = 0; i < points.size(); i++)
+        points_3d_[i] = points[i];
+    if (points_3d_.empty())
+        std::cout << "My rank: " << rank << "Cloud is empty\n";
+    cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
+    point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
+    window.showWidget("points", point_cloud);
+    window.spin();
+
     if ((left_child != -1) && (rank != 0))
     {
+
         points.clear();
         points.shrink_to_fit();
     }
@@ -500,11 +513,11 @@ int main(int argc, char *argv[])
         MyPoint3D p = points[std::rand() % points.size()];
         borders[0] = p;
         borders[1] = MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
-        
+
         cv::viz::Viz3d window;
-        std::vector<cv::Point3d> points_3d_(points.size());
-        for (int i = 0; i < points.size(); i++)
-            points_3d_[i] = points[i];
+        std::vector<cv::Point3d> points_3d_;
+        for (int i = 0; i < points.size(); i+=4)
+            points_3d_.push_back(points[i]);
         if (points_3d_.empty())
             std::cout << "My rank: " << rank << "Cloud is empty\n";
         cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
@@ -515,7 +528,7 @@ int main(int argc, char *argv[])
         cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
         window.showWidget("cube", cube);
         window.spin();
-        
+
         if (process_num > 1)
         {
             points.clear();
@@ -531,12 +544,14 @@ int main(int argc, char *argv[])
         bench_timer_stop();
         std::cout << "Searching time: " << bench_t_end - bench_t_start << std::endl;
         search_time = bench_t_end - bench_t_start;
+        /*
         std::ofstream out_file;
         out_file.open("result_mpi_polus.csv", std::ios_base::app);
         out_file << build_time << ";" << search_time << ";" << process_num << ";" << argv[1] << std::endl;
         out_file.close();
+        */
         std::cout << "Size of " << seed << " is " << points.size() << std::endl;
-        
+
         cv::viz::Viz3d window;
         cv::viz::WCube cube = cv::viz::WCube(borders[0], borders[1], true, cv::viz::Color::blue());
         cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
@@ -555,7 +570,6 @@ int main(int argc, char *argv[])
         }
 
         window.spin();
-        
     }
 
     MPI_Type_free(&point_type);

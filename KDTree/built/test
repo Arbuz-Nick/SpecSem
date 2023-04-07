@@ -6,4 +6,4 @@ mpiexec -n 7 ./kdtree f $i
 done
 
 
-10
+# 10!
