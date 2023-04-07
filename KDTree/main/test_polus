@@ -1,6 +1,6 @@
 
 #! /bin/bash
-echo "BuildTime;SearchTime;Nthreads;data_type">result_mpi_polus.csv
+echo "BuildTime;SearchTime;Nthreads;data_type;points_found">result_mpi_polus.csv
 ./make_dirs
 
 make
