@@ -1,8 +1,0 @@
-[polus-c4-ib.bmc.hpc.cs.msu.ru:123255] 3 more processes have sent help message help-orte-odls-default.txt / execve error
-[polus-c4-ib.bmc.hpc.cs.msu.ru:123255] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-[polus-c4-ib.bmc.hpc.cs.msu.ru:123960] 3 more processes have sent help message help-orte-odls-default.txt / execve error
-[polus-c4-ib.bmc.hpc.cs.msu.ru:123960] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-[polus-c3-ib.bmc.hpc.cs.msu.ru:101159] 3 more processes have sent help message help-orte-odls-default.txt / execve error
-[polus-c3-ib.bmc.hpc.cs.msu.ru:101159] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-[polus-c3-ib.bmc.hpc.cs.msu.ru:102094] 3 more processes have sent help message help-orte-odls-default.txt / execve error
-[polus-c3-ib.bmc.hpc.cs.msu.ru:102094] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages

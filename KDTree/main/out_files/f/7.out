@@ -1,13 +1,13 @@
-Sender: LSF System <lsfadmin@polus-c3-ib.bmc.hpc.cs.msu.ru>
-Subject: Job 1042126: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Exited
+Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
+Subject: Job 1042328: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Done
 
-Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:45:56 2023
-Job was executed on host(s) <7*polus-c3-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:47:13 2023
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:51:17 2023
+Job was executed on host(s) <7*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:53:50 2023
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
-Started at Tue Apr 11 18:47:13 2023
-Terminated at Tue Apr 11 18:47:15 2023
-Results reported at Tue Apr 11 18:47:15 2023
+Started at Tue Apr 11 18:53:50 2023
+Terminated at Tue Apr 11 18:53:55 2023
+Results reported at Tue Apr 11 18:53:55 2023
 
 Your job looked like:
 
@@ -23,36 +23,123 @@ OMP_NUM_THREADS=1 mpiexec ./prog f 10
 
 ------------------------------------------------------------
 
-Exited with exit code 213.
+Successfully completed.
 
 Resource usage summary:
 
-    CPU time :                                   0.22 sec.
-    Max Memory :                                 5 MB
-    Average Memory :                             3.67 MB
+    CPU time :                                   24.79 sec.
+    Max Memory :                                 393 MB
+    Average Memory :                             262.33 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              11
+    Max Threads :                                30
+    Run time :                                   6 sec.
+    Turnaround time :                            158 sec.
+
+The output (if any) follows:
+
+48853
+
+
+PS:
+
+Read file <./err_files/f/7.err> for stderr output of this job.
+
+Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
+Subject: Job 1042348: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Done
+
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:51:18 2023
+Job was executed on host(s) <7*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:54:32 2023
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
+Started at Tue Apr 11 18:54:32 2023
+Terminated at Tue Apr 11 18:54:37 2023
+Results reported at Tue Apr 11 18:54:37 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
+source /polusfs/setenv/setup.SMPI
+#BSUB -n 7
+#BSUB -W 00:30
+#BSUB -o ./out_files/f/7.out
+#BSUB -e ./err_files/f/7.err
+OMP_NUM_THREADS=1 mpiexec ./prog f 10
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   24.68 sec.
+    Max Memory :                                 432 MB
+    Average Memory :                             278.67 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              11
+    Max Threads :                                30
+    Run time :                                   3 sec.
+    Turnaround time :                            199 sec.
+
+The output (if any) follows:
+
+48853
+
+
+PS:
+
+Read file <./err_files/f/7.err> for stderr output of this job.
+
+Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
+Subject: Job 1042368: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Done
+
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:51:18 2023
+Job was executed on host(s) <1*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:54:52 2023
+                            <6*polus-c3-ib.bmc.hpc.cs.msu.ru>
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
+Started at Tue Apr 11 18:54:52 2023
+Terminated at Tue Apr 11 18:54:58 2023
+Results reported at Tue Apr 11 18:54:58 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
+source /polusfs/setenv/setup.SMPI
+#BSUB -n 7
+#BSUB -W 00:30
+#BSUB -o ./out_files/f/7.out
+#BSUB -e ./err_files/f/7.err
+OMP_NUM_THREADS=1 mpiexec ./prog f 10
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   23.27 sec.
+    Max Memory :                                 95 MB
+    Average Memory :                             64.67 MB
     Total Requested Memory :                     -
     Delta Memory :                               -
     Max Swap :                                   -
     Max Processes :                              5
-    Max Threads :                                6
-    Run time :                                   1 sec.
-    Turnaround time :                            79 sec.
+    Max Threads :                                12
+    Run time :                                   5 sec.
+    Turnaround time :                            220 sec.
 
 The output (if any) follows:
 
---------------------------------------------------------------------------
-Open MPI tried to fork a new process via the "execve" system call but
-failed.  Open MPI checks many things before attempting to launch a
-child process, but nothing is perfect. This error may be indicative
-of another problem on the target host, or even something as silly as
-having specified a directory for your application. Your job will now
-abort.
-
-  Local host:        polus-c3-ib
-  Application name:  ./prog
-  Error:             Exec format error
---------------------------------------------------------------------------
-7 total processes failed to start
+48853
 
 
 PS:
@@ -60,15 +147,15 @@ PS:
 Read file <./err_files/f/7.err> for stderr output of this job.
 
 Sender: LSF System <lsfadmin@polus-c3-ib.bmc.hpc.cs.msu.ru>
-Subject: Job 1042146: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Exited
+Subject: Job 1042388: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Done
 
-Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:45:57 2023
-Job was executed on host(s) <7*polus-c3-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:47:24 2023
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:51:19 2023
+Job was executed on host(s) <7*polus-c3-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:55:20 2023
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
 </home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
-Started at Tue Apr 11 18:47:24 2023
-Terminated at Tue Apr 11 18:47:25 2023
-Results reported at Tue Apr 11 18:47:25 2023
+Started at Tue Apr 11 18:55:20 2023
+Terminated at Tue Apr 11 18:55:26 2023
+Results reported at Tue Apr 11 18:55:26 2023
 
 Your job looked like:
 
@@ -84,158 +171,24 @@ OMP_NUM_THREADS=1 mpiexec ./prog f 10
 
 ------------------------------------------------------------
 
-Exited with exit code 213.
+Successfully completed.
 
 Resource usage summary:
 
-    CPU time :                                   0.22 sec.
-    Max Memory :                                 -
-    Average Memory :                             -
+    CPU time :                                   23.88 sec.
+    Max Memory :                                 419 MB
+    Average Memory :                             280.33 MB
     Total Requested Memory :                     -
     Delta Memory :                               -
     Max Swap :                                   -
-    Max Processes :                              -
-    Max Threads :                                -
-    Run time :                                   1 sec.
-    Turnaround time :                            88 sec.
+    Max Processes :                              11
+    Max Threads :                                30
+    Run time :                                   5 sec.
+    Turnaround time :                            247 sec.
 
 The output (if any) follows:
 
---------------------------------------------------------------------------
-Open MPI tried to fork a new process via the "execve" system call but
-failed.  Open MPI checks many things before attempting to launch a
-child process, but nothing is perfect. This error may be indicative
-of another problem on the target host, or even something as silly as
-having specified a directory for your application. Your job will now
-abort.
-
-  Local host:        polus-c3-ib
-  Application name:  ./prog
-  Error:             Exec format error
---------------------------------------------------------------------------
-7 total processes failed to start
-
-
-PS:
-
-Read file <./err_files/f/7.err> for stderr output of this job.
-
-Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
-Subject: Job 1042166: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Exited
-
-Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:45:58 2023
-Job was executed on host(s) <7*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:47:36 2023
-</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
-</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
-Started at Tue Apr 11 18:47:36 2023
-Terminated at Tue Apr 11 18:47:37 2023
-Results reported at Tue Apr 11 18:47:37 2023
-
-Your job looked like:
-
-------------------------------------------------------------
-# LSBATCH: User input
-# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
-source /polusfs/setenv/setup.SMPI
-#BSUB -n 7
-#BSUB -W 00:30
-#BSUB -o ./out_files/f/7.out
-#BSUB -e ./err_files/f/7.err
-OMP_NUM_THREADS=1 mpiexec ./prog f 10
-
-------------------------------------------------------------
-
-Exited with exit code 213.
-
-Resource usage summary:
-
-    CPU time :                                   0.21 sec.
-    Max Memory :                                 -
-    Average Memory :                             -
-    Total Requested Memory :                     -
-    Delta Memory :                               -
-    Max Swap :                                   -
-    Max Processes :                              1
-    Max Threads :                                1
-    Run time :                                   1 sec.
-    Turnaround time :                            99 sec.
-
-The output (if any) follows:
-
---------------------------------------------------------------------------
-Open MPI tried to fork a new process via the "execve" system call but
-failed.  Open MPI checks many things before attempting to launch a
-child process, but nothing is perfect. This error may be indicative
-of another problem on the target host, or even something as silly as
-having specified a directory for your application. Your job will now
-abort.
-
-  Local host:        polus-c4-ib
-  Application name:  ./prog
-  Error:             Exec format error
---------------------------------------------------------------------------
-7 total processes failed to start
-
-
-PS:
-
-Read file <./err_files/f/7.err> for stderr output of this job.
-
-Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
-Subject: Job 1042186: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Exited
-
-Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 7;#BSUB -W 00:30;#BSUB -o ./out_files/f/7.out;#BSUB -e ./err_files/f/7.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:45:58 2023
-Job was executed on host(s) <7*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue Apr 11 18:47:50 2023
-</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
-</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
-Started at Tue Apr 11 18:47:50 2023
-Terminated at Tue Apr 11 18:47:52 2023
-Results reported at Tue Apr 11 18:47:52 2023
-
-Your job looked like:
-
-------------------------------------------------------------
-# LSBATCH: User input
-# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
-source /polusfs/setenv/setup.SMPI
-#BSUB -n 7
-#BSUB -W 00:30
-#BSUB -o ./out_files/f/7.out
-#BSUB -e ./err_files/f/7.err
-OMP_NUM_THREADS=1 mpiexec ./prog f 10
-
-------------------------------------------------------------
-
-Exited with exit code 213.
-
-Resource usage summary:
-
-    CPU time :                                   0.21 sec.
-    Max Memory :                                 1 MB
-    Average Memory :                             1.00 MB
-    Total Requested Memory :                     -
-    Delta Memory :                               -
-    Max Swap :                                   -
-    Max Processes :                              1
-    Max Threads :                                1
-    Run time :                                   2 sec.
-    Turnaround time :                            114 sec.
-
-The output (if any) follows:
-
---------------------------------------------------------------------------
-Open MPI tried to fork a new process via the "execve" system call but
-failed.  Open MPI checks many things before attempting to launch a
-child process, but nothing is perfect. This error may be indicative
-of another problem on the target host, or even something as silly as
-having specified a directory for your application. Your job will now
-abort.
-
-  Local host:        polus-c4-ib
-  Application name:  ./prog
-  Error:             Exec format error
---------------------------------------------------------------------------
-7 total processes failed to start
+48853
 
 
 PS:
