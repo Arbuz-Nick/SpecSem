@@ -402,9 +402,10 @@ int main(int argc, char *argv[])
         bench_timer_stop();
         build_time = bench_t_end - bench_t_start;
         bench_timer_start();
-        MyPoint3D p = points[std::rand() % points.size()];
-        borders[0] = p;
-        borders[1] = MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
+        //MyPoint3D p = points[std::rand() % points.size()];
+        borders[0] = MyPoint3D(-64.9471, -115.96, 80.1399);
+        borders[1] = MyPoint3D(278.053, 85.0401, 572.14); // MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
+        
         if (process_num > 1)
         {
             points.clear();

@@ -508,10 +508,9 @@ int main(int argc, char *argv[])
         std::cout << "Built time: " << bench_t_end - bench_t_start << std::endl;
         build_time = bench_t_end - bench_t_start;
         bench_timer_start();
-        MyPoint3D p = points[std::rand() % points.size()];
-        borders[0] = p;
-        borders[1] = MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
-        
+        //MyPoint3D p = points[std::rand() % points.size()];
+        borders[0] = MyPoint3D(-64.9471, -115.96, 80.1399);
+        borders[1] = MyPoint3D(278.053, 85.0401, 572.14); // MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
         cv::viz::Viz3d window;
         std::vector<cv::Point3d> points_3d_;
         for (int i = 0; i < points.size(); i += 4)
@@ -541,12 +540,6 @@ int main(int argc, char *argv[])
         bench_timer_stop();
         std::cout << "Searching time: " << bench_t_end - bench_t_start << std::endl;
         search_time = bench_t_end - bench_t_start;
-        /*
-        std::ofstream out_file;
-        out_file.open("result_mpi_polus.csv", std::ios_base::app);
-        out_file << build_time << ";" << search_time << ";" << process_num << ";" << argv[1] << std::endl;
-        out_file.close();
-        */
         std::cout << "Size of " << seed << " is " << points.size() << std::endl;
 
         cv::viz::Viz3d window;
@@ -565,18 +558,11 @@ int main(int argc, char *argv[])
             window.showWidget("points", point_cloud);
         }
         window.spin();
-        
+
     }
 
     MPI_Type_free(&point_type);
     MPI_Barrier(MPI_COMM_WORLD);
-    // std::cout << "My rank: " << rank << " Finalize" << std::endl;
     MPI_Finalize();
     return 0;
 }
-/*
-               0
-        1              2
-   3       4       5       6
- 7   8   9  10  11  12  13  14
-*/
