@@ -242,7 +242,7 @@ void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int clo
             MPI_Send(points.data(), npoints, point_type, left_child, 1, MPI_COMM_WORLD);
         }
     }
-
+    /*
     cv::viz::Viz3d window(std::to_string(rank));
     std::vector<cv::Point3d> points_3d_(points.size());
     for (int i = 0; i < points.size(); i++)
@@ -253,7 +253,7 @@ void MPI_kdtree(MPI_Datatype point_type, std::vector<MyPoint3D> &points, int clo
     point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
     window.showWidget("points", point_cloud);
     window.spin();
-
+    */
     if ((left_child != -1) && (rank != 0))
     {
 
@@ -470,6 +470,9 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
 
 int main(int argc, char *argv[])
 {
+    int seed = 1;
+    sscanf(argv[2], "%d", &seed);
+    std::srand(seed);
     int point_number = -1;
     std::string path = "";
 
@@ -491,13 +494,8 @@ int main(int argc, char *argv[])
     MPI_Comm_size(MPI_COMM_WORLD, &process_num);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    std::vector<MyPoint3D> points;
-    int seed = 1;
-
-    sscanf(argv[2], "%d", &seed);
-    std::srand(seed);
     MPI_Datatype point_type = MyPoint3D::create_mpi_datatype();
-
+    std::vector<MyPoint3D> points;
     if (rank == 0)
         bench_timer_start();
 
@@ -513,10 +511,10 @@ int main(int argc, char *argv[])
         MyPoint3D p = points[std::rand() % points.size()];
         borders[0] = p;
         borders[1] = MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
-
+        
         cv::viz::Viz3d window;
         std::vector<cv::Point3d> points_3d_;
-        for (int i = 0; i < points.size(); i+=4)
+        for (int i = 0; i < points.size(); i += 4)
             points_3d_.push_back(points[i]);
         if (points_3d_.empty())
             std::cout << "My rank: " << rank << "Cloud is empty\n";
@@ -537,7 +535,6 @@ int main(int argc, char *argv[])
     }
 
     rectangleSearch(point_type, borders, points);
-    MPI_Barrier(MPI_COMM_WORLD);
 
     if (rank == 0)
     {
@@ -556,7 +553,6 @@ int main(int argc, char *argv[])
         cv::viz::WCube cube = cv::viz::WCube(borders[0], borders[1], true, cv::viz::Color::blue());
         cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
         window.showWidget("cube", cube);
-
         std::vector<cv::Point3d> points_3d_(points.size());
         for (int i = 0; i < points.size(); i++)
             points_3d_[i] = points[i];
@@ -568,8 +564,8 @@ int main(int argc, char *argv[])
             point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
             window.showWidget("points", point_cloud);
         }
-
         window.spin();
+        
     }
 
     MPI_Type_free(&point_type);

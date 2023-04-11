@@ -21,7 +21,6 @@
 #include <sys/types.h>
 #include <signal.h>
 
-
 int axis = 0;
 int process_num, rank;
 int width = 1000;
@@ -256,7 +255,7 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
     {
         right_child = -1;
     }
-    
+
     if (left_child == -1)
     {
 
@@ -269,7 +268,7 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
             return;
         }
         kdt::KDTree<MyPoint3D> kdtree(points);
-        
+
         const std::vector<int> cubeIndices = kdtree.rectangleSearch(borders[0], borders[1]);
         std::vector<MyPoint3D> found_points_3d;
         for (auto i : cubeIndices)
@@ -366,10 +365,9 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
 
 int main(int argc, char *argv[])
 {
-    int seed;
+    int seed = 1;
     sscanf(argv[2], "%d", &seed);
-    std::srand(time(NULL));
-
+    std::srand(seed);
     int point_number = -1;
     std::string path = "";
 
@@ -392,7 +390,6 @@ int main(int argc, char *argv[])
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     MPI_Datatype point_type = MyPoint3D::create_mpi_datatype();
-
     std::vector<MyPoint3D> points;
     if (rank == 0)
         bench_timer_start();
@@ -406,10 +403,13 @@ int main(int argc, char *argv[])
         build_time = bench_t_end - bench_t_start;
         bench_timer_start();
         MyPoint3D p = points[std::rand() % points.size()];
-        points.clear();
-        points.shrink_to_fit();
         borders[0] = p;
         borders[1] = MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
+        if (process_num > 1)
+        {
+            points.clear();
+            points.shrink_to_fit();
+        }
     }
 
     rectangleSearch(point_type, borders, points);
@@ -419,10 +419,9 @@ int main(int argc, char *argv[])
         bench_timer_stop();
         search_time = bench_t_end - bench_t_start;
         std::ofstream out_file;
-        out_file.open("result_mpi_polus.csv", std::ios_base::app);
+        out_file.open("result_mpi_local.csv", std::ios_base::app);
         out_file << build_time << ";" << search_time << ";" << process_num << ";" << argv[1] << ";" << points.size() << std::endl;
         out_file.close();
-
     }
 
     MPI_Type_free(&point_type);
@@ -430,4 +429,3 @@ int main(int argc, char *argv[])
     MPI_Finalize();
     return 0;
 }
-
