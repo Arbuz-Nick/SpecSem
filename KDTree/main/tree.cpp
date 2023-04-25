@@ -420,7 +420,7 @@ int main(int argc, char *argv[])
         bench_timer_stop();
         search_time = bench_t_end - bench_t_start;
         std::ofstream out_file;
-        out_file.open("result_mpi_polus.csv", std::ios_base::app);
+        out_file.open("result_mpi_local.csv", std::ios_base::app);
         out_file << build_time << ";" << search_time << ";" << process_num << ";" << argv[1] << ";" << points.size() << std::endl;
         out_file.close();
     }

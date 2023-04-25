@@ -23,6 +23,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/viz/viz3d.hpp>
+// #include <opencv2/viz/widgets.hpp>
 
 int axis = 0;
 int process_num, rank;
@@ -391,7 +392,6 @@ void rectangleSearch(MPI_Datatype point_type, MyPoint3D borders[2], std::vector<
         }
         else
         {
-            // std::cout << "My rank: " << rank << ", send to: " << left_child << right_border << std::endl;
             MPI_Send(borders, 2, point_type, left_child, 1, MPI_COMM_WORLD);
         }
 
@@ -508,7 +508,7 @@ int main(int argc, char *argv[])
         std::cout << "Built time: " << bench_t_end - bench_t_start << std::endl;
         build_time = bench_t_end - bench_t_start;
         bench_timer_start();
-        //MyPoint3D p = points[std::rand() % points.size()];
+        // MyPoint3D p = points[std::rand() % points.size()];
         borders[0] = MyPoint3D(-64.9471, -115.96, 80.1399);
         borders[1] = MyPoint3D(278.053, 85.0401, 572.14); // MyPoint3D(p[0] + std::rand() % 500, p[1] + std::rand() % 500, p[2] + std::rand() % 500);
         cv::viz::Viz3d window;
@@ -519,10 +519,12 @@ int main(int argc, char *argv[])
             std::cout << "My rank: " << rank << "Cloud is empty\n";
         cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
         point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
+        point_cloud.setRenderingProperty(cv::viz::SHADING, cv::viz::SHADING_FLAT);
         window.showWidget("points", point_cloud);
         // const MyPoint3D bot_3d((width - side_x) / 2, (height - side_y) / 2, (deep - side_z) / 2), top_3d((width + side_x) / 2, (height + side_y) / 2, (deep + side_z) / 2);
         cv::viz::WCube cube = cv::viz::WCube(borders[0], borders[1], true, cv::viz::Color::blue());
         cube.setRenderingProperty(cv::viz::LINE_WIDTH, l_width);
+        
         window.showWidget("cube", cube);
         window.spin();
 
@@ -555,10 +557,12 @@ int main(int argc, char *argv[])
         {
             cv::viz::WCloud point_cloud = cv::viz::WCloud(points_3d_, cv::viz::Color::green());
             point_cloud.setRenderingProperty(cv::viz::POINT_SIZE, p_width);
+            // point_cloud.setRenderingProperty(cv::viz::LIGHTING, cv::viz::LIGHTING_FLAT);
+            point_cloud.setRenderingProperty(cv::viz::SHADING, cv::viz::SHADING_GOURAUD);
+
             window.showWidget("points", point_cloud);
         }
         window.spin();
-
     }
 
     MPI_Type_free(&point_type);
