@@ -1,0 +1,216 @@
+Sender: LSF System <lsfadmin@polus-c3-ib.bmc.hpc.cs.msu.ru>
+Subject: Job 1046463: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 23;#BSUB -W 00:30;#BSUB -o ./out_files/f/23.out;#BSUB -e ./err_files/f/23.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Done
+
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 23;#BSUB -W 00:30;#BSUB -o ./out_files/f/23.out;#BSUB -e ./err_files/f/23.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue May  2 19:01:09 2023
+Job was executed on host(s) <7*polus-c3-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue May  2 19:05:30 2023
+                            <16*polus-c4-ib.bmc.hpc.cs.msu.ru>
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
+Started at Tue May  2 19:05:30 2023
+Terminated at Tue May  2 19:05:35 2023
+Results reported at Tue May  2 19:05:35 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
+source /polusfs/setenv/setup.SMPI
+#BSUB -n 23
+#BSUB -W 00:30
+#BSUB -o ./out_files/f/23.out
+#BSUB -e ./err_files/f/23.err
+OMP_NUM_THREADS=1 mpiexec ./prog f 10
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   76.82 sec.
+    Max Memory :                                 408 MB
+    Average Memory :                             272.33 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              11
+    Max Threads :                                30
+    Run time :                                   5 sec.
+    Turnaround time :                            266 sec.
+
+The output (if any) follows:
+
+57194
+26251
+80040
+133667
+134096
+
+
+PS:
+
+Read file <./err_files/f/23.err> for stderr output of this job.
+
+Sender: LSF System <lsfadmin@polus-c4-ib.bmc.hpc.cs.msu.ru>
+Subject: Job 1046623: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 23;#BSUB -W 00:30;#BSUB -o ./out_files/f/23.out;#BSUB -e ./err_files/f/23.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Done
+
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 23;#BSUB -W 00:30;#BSUB -o ./out_files/f/23.out;#BSUB -e ./err_files/f/23.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue May  2 19:01:15 2023
+Job was executed on host(s) <18*polus-c4-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue May  2 19:12:52 2023
+                            <5*polus-c3-ib.bmc.hpc.cs.msu.ru>
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
+Started at Tue May  2 19:12:52 2023
+Terminated at Tue May  2 19:12:57 2023
+Results reported at Tue May  2 19:12:57 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
+source /polusfs/setenv/setup.SMPI
+#BSUB -n 23
+#BSUB -W 00:30
+#BSUB -o ./out_files/f/23.out
+#BSUB -e ./err_files/f/23.err
+OMP_NUM_THREADS=1 mpiexec ./prog f 10
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   81.00 sec.
+    Max Memory :                                 994 MB
+    Average Memory :                             663.00 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              22
+    Max Threads :                                63
+    Run time :                                   5 sec.
+    Turnaround time :                            702 sec.
+
+The output (if any) follows:
+
+57194
+80040
+26251
+133667
+134096
+
+
+PS:
+
+Read file <./err_files/f/23.err> for stderr output of this job.
+
+Sender: LSF System <lsfadmin@polus-c3-ib.bmc.hpc.cs.msu.ru>
+Subject: Job 1046786: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 23;#BSUB -W 00:30;#BSUB -o ./out_files/f/23.out;#BSUB -e ./err_files/f/23.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Done
+
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 23;#BSUB -W 00:30;#BSUB -o ./out_files/f/23.out;#BSUB -e ./err_files/f/23.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue May  2 19:04:21 2023
+Job was executed on host(s) <7*polus-c3-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue May  2 19:22:24 2023
+                            <16*polus-c4-ib.bmc.hpc.cs.msu.ru>
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
+Started at Tue May  2 19:22:24 2023
+Terminated at Tue May  2 19:22:31 2023
+Results reported at Tue May  2 19:22:31 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
+source /polusfs/setenv/setup.SMPI
+#BSUB -n 23
+#BSUB -W 00:30
+#BSUB -o ./out_files/f/23.out
+#BSUB -e ./err_files/f/23.err
+OMP_NUM_THREADS=1 mpiexec ./prog f 10
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   93.00 sec.
+    Max Memory :                                 391 MB
+    Average Memory :                             260.67 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              11
+    Max Threads :                                30
+    Run time :                                   6 sec.
+    Turnaround time :                            1090 sec.
+
+The output (if any) follows:
+
+26251
+80040
+57194
+134096
+133667
+
+
+PS:
+
+Read file <./err_files/f/23.err> for stderr output of this job.
+
+Sender: LSF System <lsfadmin@polus-c3-ib.bmc.hpc.cs.msu.ru>
+Subject: Job 1046952: <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 23;#BSUB -W 00:30;#BSUB -o ./out_files/f/23.out;#BSUB -e ./err_files/f/23.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> in cluster <MSUCluster> Done
+
+Job <# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #;source /polusfs/setenv/setup.SMPI;#BSUB -n 23;#BSUB -W 00:30;#BSUB -o ./out_files/f/23.out;#BSUB -e ./err_files/f/23.err;OMP_NUM_THREADS=1 mpiexec ./prog f 10> was submitted from host <polus-ib.bmc.hpc.cs.msu.ru> by user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue May  2 19:10:26 2023
+Job was executed on host(s) <20*polus-c3-ib.bmc.hpc.cs.msu.ru>, in queue <short>, as user <edu-cmc-sqi21-01> in cluster <MSUCluster> at Tue May  2 19:33:08 2023
+                            <3*polus-c4-ib.bmc.hpc.cs.msu.ru>
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01> was used as the home directory.
+</home_edu/edu-cmc-sqi21/edu-cmc-sqi21-01/SpecSem/SpecSem/KDTree/main> was used as the working directory.
+Started at Tue May  2 19:33:08 2023
+Terminated at Tue May  2 19:33:13 2023
+Results reported at Tue May  2 19:33:13 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+# this file was automaticly created by mpisubmit.pl script for edu-cmc-sqi21-01 #
+source /polusfs/setenv/setup.SMPI
+#BSUB -n 23
+#BSUB -W 00:30
+#BSUB -o ./out_files/f/23.out
+#BSUB -e ./err_files/f/23.err
+OMP_NUM_THREADS=1 mpiexec ./prog f 10
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   81.33 sec.
+    Max Memory :                                 1078 MB
+    Average Memory :                             718.67 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              24
+    Max Threads :                                69
+    Run time :                                   6 sec.
+    Turnaround time :                            1367 sec.
+
+The output (if any) follows:
+
+26251
+80040
+57194
+133667
+134096
+
+
+PS:
+
+Read file <./err_files/f/23.err> for stderr output of this job.
+
